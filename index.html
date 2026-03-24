@@ -2,39 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Secure Application Profile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Modern App Variables */
         :root {
-            --bg-color: #f7f9fc;
+            --bg-color: #f4f7f9;
             --surface: #ffffff;
             --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --border: #e2e8f0;
+            --text-secondary: #475569;
+            --border: #cbd5e1;
             --input-bg: #f8fafc;
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
-            --primary-ring: rgba(37, 99, 235, 0.15);
+            --primary-ring: rgba(37, 99, 235, 0.2);
             --success: #10b981;
             --error: #ef4444;
             --error-ring: rgba(239, 68, 68, 0.15);
-            --radius-md: 12px;
+            --radius-md: 14px;
             --radius-lg: 24px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         *, *::before, *::after {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.5;
             display: flex;
             justify-content: center;
             padding: 40px 20px;
@@ -43,84 +45,86 @@
 
         .app-container {
             width: 100%;
-            max-width: 700px;
+            max-width: 650px;
             background: var(--surface);
             border-radius: var(--radius-lg);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
-            overflow: hidden;
+            box-shadow: 0 12px 30px -10px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+            position: relative;
         }
 
+        /* Clean Header */
         .app-header {
-            padding: 30px 40px 20px;
+            padding: 30px 35px 20px;
             border-bottom: 1px solid var(--border);
         }
         
-        .form-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin: 0 0 15px 0;
-        }
-
-        .header-actions {
+        .header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .header-top-row h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+            color: #0f172a;
         }
 
         .step-counter {
-            background: var(--input-bg);
-            padding: 6px 12px;
+            background: #f1f5f9;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--text-secondary);
-            border: 1px solid var(--border);
-            white-space: nowrap;
+            border: 1px solid #e2e8f0;
         }
 
         .progress-bar {
-            height: 6px;
-            background: var(--input-bg);
+            height: 8px;
+            background: #e2e8f0;
             border-radius: 10px;
             overflow: hidden;
             width: 100%;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .progress-fill {
             height: 100%;
             background: var(--primary);
             border-radius: 10px;
-            transition: width 0.4s ease;
+            transition: width 0.5s ease-in-out;
         }
 
+        /* Smooth Form Steps */
         .form-content {
-            padding: 30px 40px;
+            padding: 30px 35px;
         }
 
         .form-step {
             display: none;
-            animation: fadeIn 0.4s ease forwards;
         }
 
         .form-step.active {
             display: block;
+            animation: slideFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateX(15px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .step-description {
             color: var(--text-secondary);
-            margin-bottom: 24px;
+            margin-bottom: 25px;
             font-size: 0.95rem;
         }
 
-        /* Grid for Desktop */
+        /* Desktop Grid */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -128,49 +132,56 @@
             width: 100%;
         }
 
-        .full-width {
-            grid-column: 1 / -1;
-        }
+        .full-width { grid-column: 1 / -1; }
 
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            min-width: 0; /* Prevents flex-item blowout */
+            gap: 6px;
+            width: 100%;
+            min-width: 0;
         }
 
         label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: #334155;
+            padding-left: 2px;
         }
 
-        .req-star {
-            color: var(--error);
-            margin-left: 3px;
-        }
+        .req-star { color: var(--error); margin-left: 3px; }
 
-        /* Fix for Date and Text boxes matching exactly */
+        /* Premium Inputs */
         input[type="text"], input[type="email"], input[type="number"], 
         input[type="tel"], input[type="date"], input[type="url"], select, textarea {
-            display: block;
             width: 100%;
-            min-height: 50px;
+            min-height: 52px;
             padding: 14px 16px;
             background-color: var(--input-bg);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             color: var(--text-primary);
             font-family: inherit;
-            font-size: 16px !important; /* Prevents iOS Zoom */
+            font-size: 16px !important; /* Absolute necessity to prevent iOS Zoom */
             transition: var(--transition);
-            -webkit-appearance: none; /* Standardizes iOS appearance */
+            -webkit-appearance: none;
+            appearance: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset;
+        }
+
+        /* Custom Select Arrow */
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
-            background-color: var(--surface);
+            background-color: #fff;
             box-shadow: 0 0 0 4px var(--primary-ring);
         }
 
@@ -178,21 +189,35 @@
             border-color: var(--error) !important;
             box-shadow: 0 0 0 4px var(--error-ring) !important;
         }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 2px;
+            display: none;
+            padding-left: 2px;
+        }
+        .error-border ~ .error-message { display: block; }
 
+        /* Combined Add-ons (Currency / Phone) */
         .currency-input, .phone-input {
             display: flex;
             align-items: stretch;
             width: 100%;
+            border-radius: var(--radius-md);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset;
         }
 
         .currency-prefix {
             background-color: #f1f5f9;
-            color: var(--text-secondary);
+            color: #475569;
             padding: 0 16px;
             border: 1px solid var(--border);
             border-right: none;
             border-radius: var(--radius-md) 0 0 var(--radius-md);
             font-weight: 600;
+            font-size: 16px;
             display: flex;
             align-items: center;
         }
@@ -200,63 +225,116 @@
         .currency-input input, .phone-input input {
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             flex: 1;
+            box-shadow: none;
         }
 
         .phone-input select {
-            flex: 0 0 100px;
+            flex: 0 0 110px;
             border-radius: var(--radius-md) 0 0 var(--radius-md);
             border-right: none;
+            background-color: #f1f5f9;
+            box-shadow: none;
         }
 
+        /* iOS Style Toggle */
         .toggle-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px;
+            padding: 14px 18px;
             background: var(--input-bg);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             cursor: pointer;
-            min-height: 50px;
+            min-height: 52px;
+            margin-top: 5px;
         }
-
+        .toggle-container span { font-weight: 500; font-size: 0.95rem; }
         .toggle-container input { display: none; }
-
         .toggle-switch {
             position: relative;
-            width: 44px;
-            height: 24px;
-            background-color: var(--border);
-            border-radius: 24px;
+            width: 48px;
+            height: 26px;
+            background-color: #cbd5e1;
+            border-radius: 30px;
+            transition: var(--transition);
             flex-shrink: 0;
         }
-
         .toggle-switch::after {
             content: '';
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             background-color: white;
             border-radius: 50%;
             transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-
         .toggle-container input:checked + .toggle-switch { background-color: var(--success); }
-        .toggle-container input:checked + .toggle-switch::after { transform: translateX(20px); }
+        .toggle-container input:checked + .toggle-switch::after { transform: translateX(22px); }
 
+        /* Owner Cards (UI Upgrade) */
+        .owner-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
         .sub-header {
-            grid-column: 1 / -1;
             font-size: 1.1rem;
             font-weight: 600;
             margin-top: 15px;
             padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid #f1f5f9;
+            color: #0f172a;
+        }
+        .card-header {
+            margin-top: 0;
+            border-bottom: none;
+            margin-bottom: 15px;
         }
 
+        /* Buttons */
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px dashed #93c5fd;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .btn-outline:hover { background-color: #eff6ff; border-color: var(--primary); }
+
+        .btn-remove {
+            background-color: transparent;
+            color: var(--error);
+            border: none;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-remove:hover { background-color: #fef2f2; }
+
         .form-footer {
-            padding: 20px 40px 30px;
+            padding: 20px 35px 30px;
             display: flex;
             justify-content: space-between;
             gap: 15px;
@@ -265,48 +343,85 @@
         }
 
         button.nav-btn {
-            padding: 14px 24px;
-            font-size: 1rem;
+            padding: 16px 24px;
+            font-size: 1.05rem;
             font-weight: 600;
             border-radius: var(--radius-md);
             cursor: pointer;
+            transition: var(--transition);
             border: none;
-            min-height: 50px;
+            min-height: 54px;
         }
 
-        .btn-prev { background: transparent; color: var(--text-secondary); border: 1px solid var(--border) !important; display: none; }
-        .btn-next, .btn-submit { background: var(--primary); color: white; flex: 1; }
-        .btn-submit { display: none; background: var(--success); }
+        .btn-prev { background: #f1f5f9; color: var(--text-secondary); display: none; width: 30%; }
+        .btn-prev:hover { background: #e2e8f0; color: var(--text-primary); }
+        .btn-next, .btn-submit { background: var(--primary); color: white; flex: 1; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2); }
+        .btn-next:active, .btn-submit:active { transform: scale(0.98); }
+        .btn-submit { display: none; background: var(--success); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2); }
 
+        /* Subtle Test Badge */
         .test-fill-btn {
-            background: #ef4444; 
-            color: white; 
-            border: none; 
-            padding: 8px 14px; 
+            background: #f1f5f9; 
+            color: #64748b; 
+            border: 1px solid #e2e8f0; 
+            padding: 4px 10px; 
             border-radius: 6px; 
             cursor: pointer; 
-            font-size: 0.85rem; 
-            font-weight: bold;
+            font-size: 0.75rem; 
+            font-weight: 600;
+            transition: all 0.2s;
         }
+        .test-fill-btn:hover { background: #e2e8f0; color: #0f172a; }
 
-        /* MOBILE FIXES */
+        /* =========================================
+           ULTIMATE MOBILE OPTIMIZATION
+           ========================================= */
         @media (max-width: 600px) {
-            body { padding: 0; }
-            .app-container { border: none; border-radius: 0; box-shadow: none; }
-            .app-header { padding: 20px 20px 15px; position: sticky; top: 0; background: #fff; z-index: 100; }
-            .form-content { padding: 20px; }
+            body { 
+                padding: 0; 
+                background-color: var(--surface);
+            }
+            .app-container { 
+                border: none; 
+                border-radius: 0; 
+                box-shadow: none; 
+            }
             
-            /* Disable Grid on mobile to prevent date box overflow */
-            .form-grid { display: block; }
-            .input-group { width: 100%; margin-bottom: 20px; }
+            /* Sticky Header */
+            .app-header { 
+                padding: 20px 20px 15px; 
+                position: sticky; 
+                top: 0; 
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                z-index: 50;
+            }
+            .header-top-row h2 { font-size: 1.3rem; }
+            .form-content { padding: 10px 20px 40px; }
             
+            /* Flexbox Column perfectly aligns mobile items */
+            .form-grid { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 18px; 
+            }
+            
+            /* Owner Card Adjustments */
+            .owner-card { padding: 18px 15px; border-radius: 12px; margin-bottom: 20px; }
+
+            /* Sticky Action Footer with Safe Area (iPhone X/11/12/13/14/15 fix) */
             .form-footer { 
-                padding: 15px 20px; 
+                padding: 15px 20px;
+                padding-bottom: calc(15px + env(safe-area-inset-bottom)); /* Pushes above iOS Home Bar */
                 position: sticky; 
                 bottom: 0; 
-                z-index: 100;
-                box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+                z-index: 50;
             }
+            
+            .phone-input select { flex: 0 0 38%; }
         }
     </style>
 </head>
@@ -314,10 +429,12 @@
 
 <div class="app-container" id="mainContainer">
     <div class="app-header">
-        <h2 class="form-title">Secure Application</h2>
-        <div class="header-actions">
-            <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[TEST] Auto-Fill</button>
+        <div class="header-top-row">
+            <h2>Secure Application</h2>
             <span class="step-counter" id="stepCounter">Step 1 of 4</span>
+        </div>
+        <div>
+            <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[DEV] Auto-Fill Data</button>
         </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
@@ -327,17 +444,19 @@
     <form id="modernForm" onsubmit="submitForm(event)" novalidate>
         <div class="form-content">
 
-            <!-- STEP 1 -->
+            <!-- STEP 1: Business Profile -->
             <div class="form-step active" id="step1">
-                <p class="step-description">Business basic details. All fields required.</p>
+                <p class="step-description">Please fill out the basic details of your business. All fields are required.</p>
                 <div class="form-grid">
                     <div class="input-group full-width">
                         <label for="name">Legal Business Name & DBA<span class="req-star">*</span></label>
-                        <input type="text" id="name" name="name" placeholder="Company Inc." required>
+                        <input type="text" id="name" name="name" placeholder="Company Inc. (DBA: Great Products)" autocomplete="organization" required>
+                        <div class="error-message">This field is required</div>
                     </div>
                     <div class="input-group">
                         <label for="cEmailAddress">Business Email<span class="req-star">*</span></label>
-                        <input type="email" id="cEmailAddress" name="cEmailAddress" placeholder="contact@company.com" required>
+                        <input type="email" id="cEmailAddress" name="cEmailAddress" placeholder="contact@company.com" autocomplete="email" inputmode="email" required>
+                        <div class="error-message">Valid email is required</div>
                     </div>
                     <div class="input-group">
                         <label for="cPhoneNumber">Business Phone<span class="req-star">*</span></label>
@@ -345,85 +464,275 @@
                             <select id="cPhoneType" name="cPhoneType" required>
                                 <option value="Work">Work</option>
                                 <option value="Mobile">Mobile</option>
+                                <option value="Home">Home</option>
+                                <option value="Fax">Fax</option>
                             </select>
-                            <input type="tel" id="cPhoneNumber" name="cPhoneNumber" placeholder="(555) 000-0000" required>
+                            <input type="tel" id="cPhoneNumber" name="cPhoneNumber" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required>
                         </div>
+                        <div class="error-message">Phone number is required</div>
                     </div>
                     <div class="input-group">
                         <label for="cIncorporatedDate">Incorporation Date<span class="req-star">*</span></label>
                         <input type="date" id="cIncorporatedDate" name="cIncorporatedDate" required>
+                        <div class="error-message">Date is required</div>
                     </div>
-                    <label class="toggle-container full-width" style="margin-top:10px">
-                        <span>Commercial space?</span>
+                    <label class="toggle-container full-width">
+                        <span>Operating out of a commercial space?</span>
                         <input type="checkbox" id="cCommercialSpace" name="cCommercialSpace">
                         <div class="toggle-switch"></div>
                     </label>
-                    <div class="input-group full-width" style="margin-top:15px">
+                    <div class="input-group full-width">
                         <label for="cDescription">Business Description<span class="req-star">*</span></label>
-                        <textarea id="cDescription" name="cDescription" rows="3" required></textarea>
+                        <textarea id="cDescription" name="cDescription" rows="3" placeholder="Briefly describe what your business does..." required></textarea>
+                        <div class="error-message">Description is required</div>
                     </div>
                     <div class="input-group full-width">
                         <label for="cDocumentLink">Supporting Documentation Link<span class="req-star">*</span></label>
-                        <input type="url" id="cDocumentLink" name="cDocumentLink" placeholder="https://..." required>
+                        <input type="url" id="cDocumentLink" name="cDocumentLink" placeholder="https://drive.google.com/..." inputmode="url" required>
+                        <div class="error-message">Valid URL is required</div>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP 2 -->
+            <!-- STEP 2: Address & Financials -->
             <div class="form-step" id="step2">
+                <p class="step-description">Where are you located, and what do your financials look like?</p>
                 <div class="form-grid">
                     <div class="sub-header">Registered Address</div>
-                    <div class="input-group full-width"><label>Street Address*</label><input type="text" id="cAddressStreet" name="cAddressStreet" required></div>
-                    <div class="input-group"><label>City*</label><input type="text" id="cAddressCity" name="cAddressCity" required></div>
-                    <div class="input-group"><label>State*</label><input type="text" id="cAddressState" name="cAddressState" required></div>
-                    <div class="input-group"><label>Postal Code*</label><input type="text" id="cAddressPostalCode" name="cAddressPostalCode" required></div>
-                    <div class="input-group"><label>Country*</label><input type="text" id="cAddressCountry" name="cAddressCountry" required></div>
-                    
+                    <div class="input-group full-width">
+                        <label for="cAddressStreet">Street Address<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressStreet" name="cAddressStreet" placeholder="123 Corporate Blvd, Suite 200" autocomplete="street-address" required>
+                        <div class="error-message">Street address is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressCity">City<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressCity" name="cAddressCity" autocomplete="address-level2" required>
+                        <div class="error-message">City is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressState">State / Province<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressState" name="cAddressState" autocomplete="address-level1" required>
+                        <div class="error-message">State is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressPostalCode">Postal / Zip Code<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressPostalCode" name="cAddressPostalCode" autocomplete="postal-code" inputmode="text" required>
+                        <div class="error-message">Postal code is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressCountry">Country<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressCountry" name="cAddressCountry" autocomplete="country-name" required>
+                        <div class="error-message">Country is required</div>
+                    </div>
+
                     <div class="sub-header">Financial Snapshot</div>
-                    <div class="input-group full-width"><label>Opportunity Amount*</label><div class="currency-input"><span class="currency-prefix">USD</span><input type="number" id="cOpportunityAmount" name="cOpportunityAmount" required></div></div>
-                    <div class="input-group"><label>Annual Revenue*</label><div class="currency-input"><span class="currency-prefix">USD</span><input type="number" id="cAnnualRevenue" name="cAnnualRevenue" required></div></div>
-                    <div class="input-group"><label>2025 Projected*</label><div class="currency-input"><span class="currency-prefix">USD</span><input type="number" id="cAnnualRevenue2025" name="cAnnualRevenue2025" required></div></div>
+                    <div class="input-group full-width">
+                        <label>Requested Opportunity Amount<span class="req-star">*</span></label>
+                        <div class="currency-input">
+                            <span class="currency-prefix">USD</span>
+                            <input type="number" id="cOpportunityAmount" name="cOpportunityAmount" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                        </div>
+                        <div class="error-message">Amount is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Current Annual Revenue<span class="req-star">*</span></label>
+                        <div class="currency-input">
+                            <span class="currency-prefix">USD</span>
+                            <input type="number" id="cAnnualRevenue" name="cAnnualRevenue" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                        </div>
+                        <div class="error-message">Amount is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Projected 2025 Revenue<span class="req-star">*</span></label>
+                        <div class="currency-input">
+                            <span class="currency-prefix">USD</span>
+                            <input type="number" id="cAnnualRevenue2025" name="cAnnualRevenue2025" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                        </div>
+                        <div class="error-message">Amount is required</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- STEP 3 -->
+            <!-- STEP 3: Primary Guarantor -->
             <div class="form-step" id="step3">
+                <p class="step-description">Personal details for the primary stakeholder of the business.</p>
                 <div class="form-grid">
-                    <div class="input-group"><label>Title*</label><select id="cSalutationName" name="cSalutationName" required><option value="Mr.">Mr.</option><option value="Ms.">Ms.</option></select></div>
-                    <div class="input-group"><label>First Name*</label><input type="text" id="cFirstName" name="cFirstName" required></div>
-                    <div class="input-group"><label>Middle Name</label><input type="text" id="cMiddleName" name="cMiddleName"></div>
-                    <div class="input-group"><label>Last Name*</label><input type="text" id="cLastName" name="cLastName" required></div>
-                    <div class="input-group full-width"><label>Personal Email*</label><input type="email" id="cOwnerEmail" name="cOwnerEmail" required></div>
-                    <div class="input-group full-width"><label>Mobile Phone*</label><div class="phone-input"><select id="cOwnerPhoneType" name="cOwnerPhoneType"><option value="Mobile">Mobile</option></select><input type="tel" id="cOwnerPhoneNumber" name="cOwnerPhoneNumber" required></div></div>
-                    <div class="input-group"><label>FICO Score*</label><input type="number" id="cFICO" name="cFICO" required></div>
-                    <div class="input-group"><label>Ownership %*</label><input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" required></div>
-                    <label class="toggle-container full-width"><span style="font-weight:500">I own my home</span><input type="checkbox" id="cDoYouOwnYourHome" name="cDoYouOwnYourHome"><div class="toggle-switch"></div></label>
+                    <div class="input-group">
+                        <label for="cSalutationName">Title<span class="req-star">*</span></label>
+                        <select id="cSalutationName" name="cSalutationName" autocomplete="honorific-prefix" required>
+                            <option value="">Select</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Ms.">Ms.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Dr.">Dr.</option>
+                        </select>
+                        <div class="error-message">Title is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cFirstName">First Name<span class="req-star">*</span></label>
+                        <input type="text" id="cFirstName" name="cFirstName" autocomplete="given-name" required>
+                        <div class="error-message">First name is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cMiddleName">Middle Name</label>
+                        <input type="text" id="cMiddleName" name="cMiddleName" autocomplete="additional-name">
+                    </div>
+                    <div class="input-group">
+                        <label for="cLastName">Last Name<span class="req-star">*</span></label>
+                        <input type="text" id="cLastName" name="cLastName" autocomplete="family-name" required>
+                        <div class="error-message">Last name is required</div>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="cOwnerEmail">Personal Email<span class="req-star">*</span></label>
+                        <input type="email" id="cOwnerEmail" name="cOwnerEmail" autocomplete="email" inputmode="email" required>
+                        <div class="error-message">Valid email is required</div>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="cOwnerPhoneNumber">Direct Phone<span class="req-star">*</span></label>
+                        <div class="phone-input">
+                            <select id="cOwnerPhoneType" name="cOwnerPhoneType" required>
+                                <option value="Mobile">Mobile</option>
+                                <option value="Work">Work</option>
+                                <option value="Home">Home</option>
+                            </select>
+                            <input type="tel" id="cOwnerPhoneNumber" name="cOwnerPhoneNumber" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required>
+                        </div>
+                        <div class="error-message">Phone number is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cFICO">Est. FICO Score<span class="req-star">*</span></label>
+                        <input type="number" id="cFICO" name="cFICO" min="300" max="850" placeholder="720" inputmode="numeric" required>
+                        <div class="error-message">FICO score is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cOwnershipPercentage">Ownership Percentage (%)<span class="req-star">*</span></label>
+                        <input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal" required>
+                        <div class="error-message">Percentage is required</div>
+                    </div>
+                    <label class="toggle-container full-width">
+                        <span>I currently own my home</span>
+                        <input type="checkbox" id="cDoYouOwnYourHome" name="cDoYouOwnYourHome">
+                        <div class="toggle-switch"></div>
+                    </label>
                 </div>
             </div>
 
-            <!-- STEP 4 -->
+            <!-- STEP 4: Additional Owners -->
             <div class="form-step" id="step4">
-                <p class="step-description">Add secondary partners or skip and submit.</p>
-                <div id="owner2-section" style="display:none; margin-bottom:20px;">
-                    <div class="sub-header flex-between">Owner 2<button type="button" class="btn-remove" onclick="removeOwner(2)">Remove</button></div>
+                <p class="step-description">Do you have secondary partners? Add them below, or <strong>skip and submit</strong> if you are the only owner.</p>
+                
+                <!-- Owner 2 CARD -->
+                <div id="owner2-section" class="owner-card" style="display: none;">
+                    <div class="sub-header card-header flex-between">
+                        Secondary Owner
+                        <button type="button" class="btn-remove" onclick="removeOwner(2)">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            Remove
+                        </button>
+                    </div>
                     <div class="form-grid">
-                        <div class="input-group"><label>First Name*</label><input type="text" id="cOwner2FirstName" name="cOwner2FirstName"></div>
-                        <div class="input-group"><label>Last Name*</label><input type="text" id="cOwner2LastName" name="cOwner2LastName"></div>
-                        <div class="input-group full-width"><label>Email*</label><input type="email" id="cOwner2Email" name="cOwner2Email"></div>
-                        <div class="input-group full-width"><label>Phone*</label><div class="phone-input"><select id="cOwner2PhoneType" name="cOwner2PhoneType"><option value="Mobile">Mobile</option></select><input type="tel" id="cOwner2PhoneNumber" name="cOwner2PhoneNumber"></div></div>
-                        <div class="input-group"><label>FICO*</label><input type="number" id="cOwner2FICO" name="cOwner2FICO"></div>
-                        <div class="input-group"><label>Ownership %*</label><input type="number" id="cOwner2OwnershipPercentage" name="cOwner2OwnershipPercentage"></div>
+                        <div class="input-group">
+                            <label>First Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner2FirstName" name="cOwner2FirstName">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Last Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner2LastName" name="cOwner2LastName">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Email<span class="req-star">*</span></label>
+                            <input type="email" id="cOwner2Email" name="cOwner2Email" inputmode="email">
+                            <div class="error-message">Valid email required</div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Phone<span class="req-star">*</span></label>
+                            <div class="phone-input">
+                                <select id="cOwner2PhoneType" name="cOwner2PhoneType">
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Work">Work</option>
+                                </select>
+                                <input type="tel" id="cOwner2PhoneNumber" name="cOwner2PhoneNumber" placeholder="(555) 000-0000" inputmode="tel">
+                            </div>
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Est. FICO<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner2FICO" name="cOwner2FICO" inputmode="numeric">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Ownership (%)<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner2OwnershipPercentage" name="cOwner2OwnershipPercentage" step="0.01" inputmode="decimal">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <label class="toggle-container full-width">
+                            <span>Homeowner</span>
+                            <input type="checkbox" id="cOwner2OwnHome" name="cOwner2OwnHome">
+                            <div class="toggle-switch"></div>
+                        </label>
                     </div>
                 </div>
-                <div id="owner3-section" style="display:none; margin-bottom:20px;">
-                    <div class="sub-header flex-between">Owner 3<button type="button" class="btn-remove" onclick="removeOwner(3)">Remove</button></div>
+
+                <!-- Owner 3 CARD -->
+                <div id="owner3-section" class="owner-card" style="display: none;">
+                    <div class="sub-header card-header flex-between">
+                        Tertiary Owner
+                        <button type="button" class="btn-remove" onclick="removeOwner(3)">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            Remove
+                        </button>
+                    </div>
                     <div class="form-grid">
-                        <div class="input-group"><label>First Name*</label><input type="text" id="cOwner3FirstName" name="cOwner3FirstName"></div>
-                        <div class="input-group"><label>Last Name*</label><input type="text" id="cOwner3LastName" name="cOwner3LastName"></div>
-                        <div class="input-group full-width"><label>Email*</label><input type="email" id="cOwner3Email" name="cOwner3Email"></div>
+                        <div class="input-group">
+                            <label>First Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner3FirstName" name="cOwner3FirstName">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Last Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner3LastName" name="cOwner3LastName">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Email<span class="req-star">*</span></label>
+                            <input type="email" id="cOwner3Email" name="cOwner3Email" inputmode="email">
+                            <div class="error-message">Valid email required</div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Phone<span class="req-star">*</span></label>
+                            <div class="phone-input">
+                                <select id="cOwner3PhoneType" name="cOwner3PhoneType">
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Work">Work</option>
+                                </select>
+                                <input type="tel" id="cOwner3PhoneNumber" name="cOwner3PhoneNumber" placeholder="(555) 000-0000" inputmode="tel">
+                            </div>
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Est. FICO<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner3FICO" name="cOwner3FICO" inputmode="numeric">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Ownership (%)<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner3OwnershipPercentage" name="cOwner3OwnershipPercentage" step="0.01" inputmode="decimal">
+                            <div class="error-message">Required</div>
+                        </div>
+                        <label class="toggle-container full-width">
+                            <span>Homeowner</span>
+                            <input type="checkbox" id="cOwner3OwnHome" name="cOwner3OwnHome">
+                            <div class="toggle-switch"></div>
+                        </label>
                     </div>
                 </div>
-                <button type="button" id="btnAddOwner" class="btn-outline" onclick="addOwner()">+ Add Owner</button>
+
+                <button type="button" id="btnAddOwner" class="btn-outline" onclick="addOwner()">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Add Additional Owner
+                </button>
             </div>
 
         </div>
@@ -440,11 +749,13 @@
     function autofillTestData() {
         document.getElementById('name').value = "Acme Corp";
         document.getElementById('cEmailAddress').value = "test@acmecorp.com";
+        document.getElementById('cPhoneType').value = "Work"; 
         document.getElementById('cPhoneNumber').value = "555-123-4567";
         document.getElementById('cIncorporatedDate').value = "2020-01-01";
+        document.getElementById('cCommercialSpace').checked = true;
         document.getElementById('cDescription').value = "Testing webhook payload.";
         document.getElementById('cDocumentLink').value = "https://google.com";
-        document.getElementById('cAddressStreet').value = "123 main st";
+        document.getElementById('cAddressStreet').value = "123 Main St";
         document.getElementById('cAddressCity').value = "New York";
         document.getElementById('cAddressState').value = "NY";
         document.getElementById('cAddressPostalCode').value = "10001";
@@ -452,13 +763,41 @@
         document.getElementById('cOpportunityAmount').value = "10000";
         document.getElementById('cAnnualRevenue').value = "50000";
         document.getElementById('cAnnualRevenue2025').value = "60000";
+        
+        document.getElementById('cSalutationName').value = "Mr.";
         document.getElementById('cFirstName').value = "John";
         document.getElementById('cLastName').value = "Doe";
         document.getElementById('cOwnerEmail').value = "john@doe.com";
+        document.getElementById('cOwnerPhoneType').value = "Mobile"; 
         document.getElementById('cOwnerPhoneNumber').value = "555-111-2222";
         document.getElementById('cFICO').value = "720";
         document.getElementById('cOwnershipPercentage').value = "100";
-        document.getElementById('testFillBtn').innerText = "Data Filled ✓";
+        document.getElementById('cDoYouOwnYourHome').checked = true;
+
+        addOwner(); 
+        document.getElementById('cOwner2FirstName').value = "Jane";
+        document.getElementById('cOwner2LastName').value = "Smith";
+        document.getElementById('cOwner2Email').value = "jane.smith@test.com";
+        document.getElementById('cOwner2PhoneType').value = "Mobile";
+        document.getElementById('cOwner2PhoneNumber').value = "555-000-0152";
+        document.getElementById('cOwner2FICO').value = "780";
+        document.getElementById('cOwner2OwnershipPercentage').value = "50";
+        document.getElementById('cOwner2OwnHome').checked = true;
+
+        addOwner(); 
+        document.getElementById('cOwner3FirstName').value = "Bob";
+        document.getElementById('cOwner3LastName').value = "Johnson";
+        document.getElementById('cOwner3Email').value = "bob.johnson@test.com";
+        document.getElementById('cOwner3PhoneType').value = "Work";
+        document.getElementById('cOwner3PhoneNumber').value = "789-456-1234";
+        document.getElementById('cOwner3FICO').value = "800";
+        document.getElementById('cOwner3OwnershipPercentage').value = "25";
+        document.getElementById('cOwner3OwnHome').checked = false;
+
+        document.querySelectorAll('input, select, textarea').forEach(el => el.classList.remove('error-border'));
+        document.getElementById('testFillBtn').innerText = "Filled ✓";
+        document.getElementById('testFillBtn').style.background = "#10b981";
+        document.getElementById('testFillBtn').style.color = "#ffffff";
     }
 
     let currentStep = 0;
@@ -469,111 +808,263 @@
     const progressFill = document.getElementById('progressFill');
     const stepCounter = document.getElementById('stepCounter');
 
-    function changeStep(dir) {
-        if (dir === 1 && !validate()) return;
-        currentStep += dir;
-        steps.forEach((s, i) => s.classList.toggle('active', i === currentStep));
-        progressFill.style.width = ((currentStep + 1) / steps.length * 100) + '%';
-        stepCounter.innerText = `Step ${currentStep + 1} of 4`;
-        btnPrev.style.display = currentStep === 0 ? 'none' : 'block';
-        btnNext.style.display = currentStep === 3 ? 'none' : 'block';
-        btnSubmit.style.display = currentStep === 3 ? 'block' : 'none';
-        window.scrollTo(0,0);
-    }
+    let owner2Visible = false;
+    let owner3Visible = false;
 
-    function validate() {
-        let valid = true;
-        steps[currentStep].querySelectorAll('[required]').forEach(i => {
-            if (!i.value) { i.classList.add('error-border'); valid = false; }
-            else i.classList.remove('error-border');
+    // Remove red borders as user types
+    document.querySelectorAll('input, select, textarea').forEach(element => {
+        element.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                this.classList.remove('error-border');
+            }
         });
-        return valid;
+    });
+
+    function setInputsRequired(section, isRequired) {
+        const inputs = section.querySelectorAll('input:not([type="checkbox"]), select');
+        inputs.forEach(input => {
+            if (isRequired) {
+                input.setAttribute('required', 'true');
+            } else {
+                input.removeAttribute('required');
+                input.classList.remove('error-border');
+            }
+        });
     }
 
     function addOwner() {
-        const o2 = document.getElementById('owner2-section');
-        const o3 = document.getElementById('owner3-section');
-        if (o2.style.display === 'none') {
-            o2.style.display = 'block';
-            o2.querySelectorAll('input').forEach(i => i.required = true);
-        } else {
-            o3.style.display = 'block';
-            o3.querySelectorAll('input').forEach(i => i.required = true);
+        if (!owner2Visible) {
+            const sec = document.getElementById('owner2-section');
+            sec.style.display = 'block';
+            setInputsRequired(sec, true);
+            owner2Visible = true;
+            setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+        } else if (!owner3Visible) {
+            const sec = document.getElementById('owner3-section');
+            sec.style.display = 'block';
+            setInputsRequired(sec, true);
+            owner3Visible = true;
             document.getElementById('btnAddOwner').style.display = 'none';
+            setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
     }
 
-    function removeOwner(n) {
-        const sec = document.getElementById(`owner${n}-section`);
+    function hideAndClearOwner(num) {
+        const sec = document.getElementById(`owner${num}-section`);
         sec.style.display = 'none';
-        sec.querySelectorAll('input').forEach(i => { i.required = false; i.value = ''; });
-        document.getElementById('btnAddOwner').style.display = 'block';
+        setInputsRequired(sec, false);
+        
+        if (num === 2) owner2Visible = false;
+        if (num === 3) owner3Visible = false;
+        
+        sec.querySelectorAll('input').forEach(input => {
+            if (input.type === 'checkbox') input.checked = false;
+            else input.value = '';
+        });
+        
+        sec.querySelectorAll('select').forEach(select => {
+            select.value = "Mobile";
+        });
     }
 
-    function submitForm(e) {
-        e.preventDefault();
+    function removeOwner(num) {
+        if (num === 2) {
+            if (owner3Visible) {
+                // Shift data up smoothly
+                document.getElementById('cOwner2FirstName').value = document.getElementById('cOwner3FirstName').value;
+                document.getElementById('cOwner2LastName').value = document.getElementById('cOwner3LastName').value;
+                document.getElementById('cOwner2Email').value = document.getElementById('cOwner3Email').value;
+                document.getElementById('cOwner2PhoneType').value = document.getElementById('cOwner3PhoneType').value;
+                document.getElementById('cOwner2PhoneNumber').value = document.getElementById('cOwner3PhoneNumber').value;
+                document.getElementById('cOwner2FICO').value = document.getElementById('cOwner3FICO').value;
+                document.getElementById('cOwner2OwnershipPercentage').value = document.getElementById('cOwner3OwnershipPercentage').value;
+                document.getElementById('cOwner2OwnHome').checked = document.getElementById('cOwner3OwnHome').checked;
+                hideAndClearOwner(3);
+            } else {
+                hideAndClearOwner(2);
+            }
+        } else if (num === 3) {
+            hideAndClearOwner(3);
+        }
+        document.getElementById('btnAddOwner').style.display = 'flex';
+    }
+
+    function validateCurrentStep() {
+        const currentStepEl = steps[currentStep];
+        const requiredInputs = currentStepEl.querySelectorAll('[required]');
+        let isValid = true;
+        let firstInvalid = null;
+
+        requiredInputs.forEach(input => {
+            if (input.value.trim() === '') {
+                input.classList.add('error-border');
+                isValid = false;
+                if (!firstInvalid) firstInvalid = input;
+            } else {
+                input.classList.remove('error-border');
+                if (input.type === 'email' && !input.value.includes('@')) {
+                    input.classList.add('error-border');
+                    isValid = false;
+                    if (!firstInvalid) firstInvalid = input;
+                }
+            }
+        });
+        
+        // Smart scroll to the error
+        if (firstInvalid) {
+            firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        return isValid;
+    }
+
+    function updateUI() {
+        steps.forEach((step, index) => {
+            if (index === currentStep) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+
+        const progressPercentage = ((currentStep + 1) / steps.length) * 100;
+        document.getElementById('progressFill').style.width = `${progressPercentage}%`;
+        document.getElementById('stepCounter').textContent = `Step ${currentStep + 1} of ${steps.length}`;
+
+        btnPrev.style.display = currentStep === 0 ? 'none' : 'block';
+        
+        if (currentStep === steps.length - 1) {
+            btnNext.style.display = 'none';
+            btnSubmit.style.display = 'block';
+        } else {
+            btnNext.style.display = 'block';
+            btnSubmit.style.display = 'none';
+        }
+    }
+
+    function changeStep(direction) {
+        if (direction === 1) {
+            if (!validateCurrentStep()) return; 
+        }
+        
+        // Blur inputs to hide mobile keyboard during transition
+        document.activeElement.blur();
+        
+        currentStep += direction;
+        if (currentStep < 0) currentStep = 0;
+        if (currentStep >= steps.length) currentStep = steps.length - 1;
+        
+        updateUI();
+        
+        // Ensure smooth scroll top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- Webhook Submission Logic ---
+    function submitForm(event) {
+        event.preventDefault(); 
+
+        if (!validateCurrentStep()) return;
+
         btnSubmit.disabled = true;
-        btnSubmit.innerText = "Sending...";
-        const formData = new FormData(e.target);
-        const getPhone = (id, typeId) => {
-            const val = document.getElementById(id).value;
-            return val ? [{phoneNumber: val, type: document.getElementById(typeId).value}] : [];
+        btnSubmit.textContent = "Sending...";
+
+        const formData = new FormData(event.target);
+        
+        const getNum = (val) => {
+            if (!val) return null;
+            const cleaned = val.toString().replace(/,/g, '');
+            return parseFloat(cleaned) || null;
+        };
+        
+        const getPhoneArray = (numParam, typeParam) => {
+            const num = formData.get(numParam) || "";
+            if (!num) return[];
+            const type = formData.get(typeParam) || "Mobile";
+            return [{"phoneNumber": num, "type": type}];
         };
 
         const payload = {
-            name: formData.get('name'),
-            cEmailAddress: formData.get('cEmailAddress'),
-            cPhoneNumber: getPhone('cPhoneNumber', 'cPhoneType'),
-            cOpportunityAmountCurrency: "USD",
-            cOpportunityAmount: parseFloat(formData.get('cOpportunityAmount')),
-            cAnnualRevenueCurrency: "USD",
-            cAnnualRevenue: parseFloat(formData.get('cAnnualRevenue')),
-            cAnnualRevenue2025Currency: "USD",
-            cAnnualRevenue2025: parseFloat(formData.get('cAnnualRevenue2025')),
-            cIncorporatedDate: formData.get('cIncorporatedDate'),
-            cAddressStreet: formData.get('cAddressStreet'),
-            cAddressCity: formData.get('cAddressCity'),
-            cAddressState: formData.get("cAddressState"),
-            cAddressCountry: formData.get("cAddressCountry"),
-            cAddressPostalCode: formData.get("cAddressPostalCode"),
-            cAddressMap: "",
-            cCommercialSpace: document.getElementById('cCommercialSpace').checked,
-            cDescription: formData.get('cDescription'),
-            cSalutationName: formData.get('cSalutationName'),
-            cFirstName: formData.get('cFirstName'),
-            cLastName: formData.get('cLastName'),
-            cMiddleName: formData.get('cMiddleName'),
-            cOwnerPhoneNumber: getPhone('cOwnerPhoneNumber', 'cOwnerPhoneType'),
-            cOwnerEmail: formData.get('cOwnerEmail'),
-            cFICO: parseInt(formData.get('cFICO')),
-            cOwnershipPercentage: parseFloat(formData.get('cOwnershipPercentage')),
-            cDoYouOwnYourHome: document.getElementById('cDoYouOwnYourHome').checked,
-            cDocumentLink: formData.get('cDocumentLink'),
-            cOwner2FirstName: formData.get('cOwner2FirstName') || "",
-            cOwner2LastName: formData.get('cOwner2LastName') || "",
-            cOwner2PhoneNumber: getPhone('cOwner2PhoneNumber', 'cOwner2PhoneType'),
-            cOwner2Email: formData.get('cOwner2Email') || "",
-            cOwner2FICO: parseInt(formData.get('cOwner2FICO')) || 0,
-            cOwner2OwnershipPercentage: parseFloat(formData.get('cOwner2OwnershipPercentage')) || 0,
-            cOwner2OwnHome: false,
-            cOwner3FirstName: formData.get('cOwner3FirstName') || "",
-            cOwner3LastName: formData.get('cOwner3LastName') || "",
-            cOwner3PhoneNumber: getPhone('cOwner3PhoneNumber', 'cOwner3PhoneType'),
-            cOwner3Email: formData.get('cOwner3Email') || "",
-            cOwner3FICO: 0,
-            cOwner3OwnershipPercentage: 0,
-            cOwner3OwnHome: false
+            "name": formData.get("name"),
+            "cBusinessNameAndDBAIfApplicable": formData.get("name"),
+            "cEmailAddress": formData.get("cEmailAddress"),
+            
+            "cPhoneNumber": getPhoneArray("cPhoneNumber", "cPhoneType"),
+            
+            "cOpportunityAmountCurrency": "USD",
+            "cOpportunityAmount": getNum(formData.get("cOpportunityAmount")),
+            "cAnnualRevenueCurrency": "USD",
+            "cAnnualRevenue": getNum(formData.get("cAnnualRevenue")),
+            "cAnnualRevenue2025Currency": "USD",
+            "cAnnualRevenue2025": getNum(formData.get("cAnnualRevenue2025")),
+            
+            "cIncorporatedDate": formData.get("cIncorporatedDate"),
+            "cAddressStreet": formData.get("cAddressStreet"),
+            "cAddressCity": formData.get("cAddressCity"),
+            "cAddressState": formData.get("cAddressState"),
+            "cAddressCountry": formData.get("cAddressCountry"),
+            "cAddressPostalCode": formData.get("cAddressPostalCode"),
+            "cAddressMap": "", 
+            "cCommercialSpace": document.getElementById("cCommercialSpace").checked,
+            "cDescription": formData.get("cDescription"),
+            "cSalutationName": formData.get("cSalutationName"),
+            "cFirstName": formData.get("cFirstName"),
+            "cLastName": formData.get("cLastName"),
+            "cMiddleName": formData.get("cMiddleName") || "",
+            
+            "cOwnerPhoneNumber": getPhoneArray("cOwnerPhoneNumber", "cOwnerPhoneType"),
+            "cOwnerEmail": formData.get("cOwnerEmail"),
+            "cFICO": getNum(formData.get("cFICO")),
+            "cOwnershipPercentage": getNum(formData.get("cOwnershipPercentage")),
+            "cDoYouOwnYourHome": document.getElementById("cDoYouOwnYourHome").checked,
+            "cDocumentLink": formData.get("cDocumentLink"),
+            
+            // EXACT MAPPING for Owner 2 & 3 (Ensuring real values are sent, not 0/false)
+            "cOwner2FirstName": formData.get("cOwner2FirstName") || "",
+            "cOwner2LastName": formData.get("cOwner2LastName") || "",
+            "cOwner2PhoneNumber": getPhoneArray("cOwner2PhoneNumber", "cOwner2PhoneType"),
+            "cOwner2Email": formData.get("cOwner2Email") || "",
+            "cOwner2FICO": getNum(formData.get("cOwner2FICO")),
+            "cOwner2OwnershipPercentage": getNum(formData.get("cOwner2OwnershipPercentage")),
+            "cOwner2OwnHome": document.getElementById("cOwner2OwnHome") ? document.getElementById("cOwner2OwnHome").checked : false,
+            
+            "cOwner3FirstName": formData.get("cOwner3FirstName") || "",
+            "cOwner3LastName": formData.get("cOwner3LastName") || "",
+            "cOwner3PhoneNumber": getPhoneArray("cOwner3PhoneNumber", "cOwner3PhoneType"),
+            "cOwner3Email": formData.get("cOwner3Email") || "",
+            "cOwner3FICO": getNum(formData.get("cOwner3FICO")),
+            "cOwner3OwnershipPercentage": getNum(formData.get("cOwner3OwnershipPercentage")),
+            "cOwner3OwnHome": document.getElementById("cOwner3OwnHome") ? document.getElementById("cOwner3OwnHome").checked : false
         };
 
         fetch("https://api-69a90979af1be5a90.bizioffice.com/webhook/56d4a958-9f72-4228-ae4f-4f2c71dc32a0", {
-            method: "POST", headers: {"Content-Type": "application/json"},
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
-        }).then(r => {
-            if(r.ok) {
-                document.getElementById('mainContainer').innerHTML = `<div style="padding:60px 20px;text-align:center"><h2>Application Submitted</h2><p>Transmitted successfully.</p></div>`;
-            } else { alert("Server error: " + r.status); btnSubmit.disabled = false; }
-        }).catch(err => { alert("Network error"); btnSubmit.disabled = false; });
+        })
+        .then(response => {
+            if(response.ok) {
+                document.getElementById('mainContainer').innerHTML = `
+                    <div style="padding: 60px 20px; text-align: center; background: #ffffff;">
+                        <svg style="color: #10b981; width: 72px; height: 72px; margin: 0 auto 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: #0f172a;">Application Submitted</h2>
+                        <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">Thank you. Your secure application has been transmitted successfully to our team for review.</p>
+                    </div>
+                `;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                throw new Error("Endpoint rejected the request.");
+            }
+        })
+        .catch(error => {
+            alert("Error sending to Webhook. Please check your connection.");
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = "Submit Application";
+        });
     }
 </script>
+
 </body>
 </html>
