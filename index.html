@@ -131,6 +131,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
+            width: 100%;
         }
 
         .full-width {
@@ -142,6 +143,7 @@
             flex-direction: column;
             gap: 8px;
             min-width: 0; /* Extremely important: stops fields from blowing out mobile width */
+            max-width: 100%;
         }
 
         label {
@@ -157,7 +159,7 @@
 
         /* Explicit 16px to prevent iOS Safari Auto-Zoom */
         input[type="text"], input[type="email"], input[type="number"], 
-        input[type="tel"], input[type="date"], input[type="url"], select, textarea {
+        input[type="tel"], input[type="url"], select, textarea {
             width: 100%;
             max-width: 100%; /* Ensure no overflow */
             padding: 14px 16px;
@@ -169,6 +171,23 @@
             font-size: 16px !important; 
             transition: var(--transition);
             box-sizing: border-box;
+        }
+
+        /* FIX FOR DATE OVERFLOW */
+        input[type="date"] {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0; /* Override iOS strict sizing */
+            padding: 14px 12px; /* Slightly reduced padding to guarantee fit */
+            background-color: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px !important; 
+            box-sizing: border-box;
+            -webkit-appearance: none; /* Strips hidden Apple padding */
+            appearance: none;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -238,7 +257,7 @@
             border-right: none;
             appearance: auto;
             cursor: pointer;
-            padding-right: 25px; /* Room for native dropdown arrow */
+            padding-right: 25px;
             min-width: 0;
         }
         .phone-input input[type="tel"] {
@@ -257,6 +276,8 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .toggle-container input {
@@ -270,6 +291,7 @@
             background-color: var(--border);
             border-radius: 24px;
             transition: var(--transition);
+            flex-shrink: 0;
         }
 
         .toggle-switch::after {
@@ -440,7 +462,8 @@
                 box-shadow: none;
             }
             .form-grid { 
-                grid-template-columns: 1fr; /* Stack everything vertically */
+                /* THE FIX: Using minmax(0, 1fr) strictly prevents elements from blowing out the grid width */
+                grid-template-columns: minmax(0, 1fr); 
                 gap: 16px;
             }
             .app-header { 
