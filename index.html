@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Secure Application Profile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,10 +27,9 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
+        /* Strict Box Sizing */
+        *, *::before, *::after {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
@@ -41,6 +40,8 @@
             display: flex;
             justify-content: center;
             padding: 40px 20px;
+            margin: 0;
+            overflow-x: hidden; /* Prevents entire page horizontal scroll */
         }
 
         /* Main App Container */
@@ -50,28 +51,28 @@
             background: var(--surface);
             border-radius: var(--radius-lg);
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
-            overflow: hidden;
             border: 1px solid var(--border);
-            position: relative; /* For sticky footer */
+            position: relative;
         }
 
-        /* Header & Progress Bar */
+        /* NEW HEADER STRUCTURE */
         .app-header {
             padding: 30px 40px 20px;
             border-bottom: 1px solid var(--border);
         }
         
-        .header-top-row {
+        .form-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            color: #111827;
+        }
+
+        .header-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .header-top-row h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
+            gap: 15px;
         }
 
         .step-counter {
@@ -82,7 +83,7 @@
             font-weight: 500;
             color: var(--text-secondary);
             border: 1px solid var(--border);
-            white-space: nowrap; /* Prevents text from stacking on itself on mobile */
+            white-space: nowrap;
         }
 
         .progress-bar {
@@ -142,14 +143,15 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            min-width: 0; /* Extremely important: stops fields from blowing out mobile width */
-            max-width: 100%;
+            width: 100%;
+            min-width: 0;
         }
 
         label {
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-secondary);
+            word-break: break-word;
         }
 
         .req-star {
@@ -157,22 +159,20 @@
             margin-left: 3px;
         }
 
-        /* Explicit 16px to prevent iOS Safari Auto-Zoom, min-height to fix thin collapsing */
+        /* Universal Input Styling */
         input[type="text"], input[type="email"], input[type="number"], 
         input[type="tel"], input[type="date"], input[type="url"], select, textarea {
-            display: block;
             width: 100%;
-            max-width: 100%; /* Ensure no overflow */
-            min-height: 50px; 
+            max-width: 100%;
+            min-height: 50px;
             padding: 14px 16px;
             background-color: var(--input-bg);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            font-size: 16px !important; 
+            font-size: 16px !important; /* Kills iOS Auto-Zoom */
             transition: var(--transition);
-            box-sizing: border-box;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -182,7 +182,6 @@
             box-shadow: 0 0 0 4px var(--primary-ring);
         }
 
-        /* Validation Error State */
         .error-border {
             border-color: var(--error) !important;
             box-shadow: 0 0 0 4px var(--error-ring) !important;
@@ -200,18 +199,16 @@
             display: block;
         }
 
-        /* Combined Currency & Amount Input */
+        /* Combined Currency Input */
         .currency-input {
             display: flex;
             align-items: stretch;
-            gap: 0;
             width: 100%;
-            min-width: 0;
         }
         .currency-prefix {
             background-color: #f1f5f9;
             color: var(--text-secondary);
-            padding: 14px 16px;
+            padding: 0 16px;
             border: 1px solid var(--border);
             border-right: none;
             border-radius: var(--radius-md) 0 0 var(--radius-md);
@@ -220,7 +217,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex: 0 0 70px;
+            flex: 0 0 auto;
         }
         .currency-input input[type="number"] {
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -228,16 +225,14 @@
             min-width: 0;
         }
 
-        /* Phone Input with Type Selector */
+        /* Phone Input */
         .phone-input {
             display: flex;
             align-items: stretch;
-            gap: 0;
             width: 100%;
-            min-width: 0;
         }
         .phone-input select {
-            flex: 0 0 100px;
+            flex: 0 0 110px;
             border-radius: var(--radius-md) 0 0 var(--radius-md);
             border-right: none;
             appearance: auto;
@@ -262,7 +257,6 @@
             border-radius: var(--radius-md);
             cursor: pointer;
             width: 100%;
-            box-sizing: border-box;
             min-height: 50px;
         }
 
@@ -278,6 +272,7 @@
             border-radius: 24px;
             transition: var(--transition);
             flex-shrink: 0;
+            margin-left: 15px;
         }
 
         .toggle-switch::after {
@@ -301,7 +296,7 @@
             transform: translateX(20px);
         }
 
-        /* Dynamic Owner UI Adjustments */
+        /* Dynamic Owner Sub-headers */
         .sub-header {
             grid-column: 1 / -1;
             font-size: 1.1rem;
@@ -375,7 +370,7 @@
             cursor: pointer;
             transition: var(--transition);
             border: none;
-            min-height: 50px; /* High accessibility touch target */
+            min-height: 50px;
         }
 
         .btn-prev {
@@ -416,15 +411,14 @@
             transform: none;
         }
 
-        /* Test Button */
         .test-fill-btn {
             background: #ef4444; 
             color: white; 
             border: none; 
-            padding: 6px 12px; 
+            padding: 8px 14px; 
             border-radius: 6px; 
             cursor: pointer; 
-            font-size: 0.8rem; 
+            font-size: 0.85rem; 
             font-weight: bold;
             transition: all 0.2s;
             height: fit-content;
@@ -435,7 +429,7 @@
         }
 
         /* =========================================
-           MOBILE OPTIMIZATION (RESPONSIVE MEDIA QUERY)
+           BULLETPROOF MOBILE OPTIMIZATION
            ========================================= */
         @media (max-width: 600px) {
             body { 
@@ -446,27 +440,38 @@
                 border: none;
                 border-radius: 0;
                 box-shadow: none;
-            }
-            .form-grid { 
-                /* Using minmax(0, 1fr) strictly prevents elements from blowing out the grid width */
-                grid-template-columns: minmax(0, 1fr); 
-                gap: 16px;
+                overflow-x: hidden;
             }
             .app-header { 
-                padding: 20px 20px 15px; 
+                padding: 20px 15px 15px; 
                 position: sticky;
                 top: 0;
                 background: var(--surface);
                 z-index: 10;
             }
-            .header-top-row h2 { font-size: 1.3rem; }
+            .form-title { 
+                font-size: 1.35rem; 
+                margin-bottom: 10px;
+            }
             .form-content { 
-                padding: 10px 20px 30px; 
+                padding: 15px 15px 30px; 
+                width: 100%;
             }
             
+            /* THE FIX: Replaces CSS Grid with Flexbox Column to prevent ALL horizontal blowouts */
+            .form-grid { 
+                display: flex; 
+                flex-direction: column; 
+                gap: 16px;
+                width: 100%;
+            }
+            .input-group {
+                width: 100%;
+            }
+
             /* Sticky Mobile Footer */
             .form-footer { 
-                padding: 15px 20px; 
+                padding: 15px; 
                 position: sticky;
                 bottom: 0;
                 background: var(--surface);
@@ -474,8 +479,9 @@
                 z-index: 10;
             }
             
-            .phone-input select { width: 40%; flex: 0 0 40%; }
-            .phone-input input[type="tel"] { width: 60%; flex: 1; }
+            /* Prevent Select Dropdowns from eating space */
+            .phone-input select { flex: 0 0 35%; }
+            .phone-input input[type="tel"] { flex: 1; }
         }
     </style>
 </head>
@@ -484,14 +490,12 @@
 <div class="app-container" id="mainContainer">
     <div class="app-header">
         
-        <div class="header-top-row">
-            <h2>Secure Application</h2>
+        <!-- NEW HEADER: Safely structured so title and buttons don't crush each other -->
+        <h2 class="form-title">Secure Application</h2>
+        <div class="header-actions">
+            <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[TEST] Auto-Fill</button>
             <span class="step-counter" id="stepCounter">Step 1 of 4</span>
         </div>
-        
-        <!-- TEMPORARY TEST AUTO-FILL BUTTON -->
-        <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[TEST] Auto-Fill</button>
-        <!-- =============================== -->
         
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
@@ -808,9 +812,6 @@
 </div>
 
 <script>
-    // =======================================================
-    // TEMPORARY AUTOFILL FUNCTION FOR TESTING - REMOVE LATER
-    // =======================================================
     function autofillTestData() {
         // Step 1
         document.getElementById('name').value = "Acme Corp (DBA: Acme Tech)";
@@ -870,7 +871,6 @@
         document.getElementById('testFillBtn').innerText = "All Data Filled ✓";
         document.getElementById('testFillBtn').style.background = "#10b981";
     }
-    // =======================================================
 
     let currentStep = 0;
     const steps = document.querySelectorAll('.form-step');
@@ -1105,7 +1105,6 @@
 
         console.log("Sending the following Payload to BiziOffice:", payload);
 
-        // Send payload via Webhook
         fetch("https://api-69a90979af1be5a90.bizioffice.com/webhook/56d4a958-9f72-4228-ae4f-4f2c71dc32a0", {
             method: "POST",
             headers: {
@@ -1115,7 +1114,6 @@
         })
         .then(response => {
             if(response.ok) {
-                // Render Success Screen
                 document.getElementById('mainContainer').innerHTML = `
                     <div style="padding: 60px 20px; text-align: center; background: #ffffff;">
                         <svg style="color: #10b981; width: 72px; height: 72px; margin: 0 auto 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1132,13 +1130,11 @@
         })
         .catch(error => {
             console.error("Webhook Error:", error);
-            
             if(error.message.includes("Failed to fetch")) {
                 alert("Network Error: This is likely a CORS block by your browser. Ensure your webhook allows cross-origin requests.");
             } else {
                 alert("Error sending to Webhook: " + error.message);
             }
-            
             btnSubmit.disabled = false;
             btnSubmit.textContent = "Securely Submit Application";
         });
