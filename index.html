@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Application Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Light Mode Variables */
+        :root {
+            --bg-color: #f7f9fc;
+            --surface: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --input-bg: #f8fafc;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-ring: rgba(37, 99, 235, 0.15);
+            --success: #10b981;
+            --error: #ef4444;
+            --error-ring: rgba(239, 68, 68, 0.15);
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* Main App Container */
+        .app-container {
+            width: 100%;
+            max-width: 700px;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* Header & Progress Bar */
+        .app-header {
+            padding: 30px 40px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-title h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .step-counter {
+            background: var(--input-bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--input-bg);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* Form Wizard Sections */
+        .form-content {
+            padding: 30px 40px;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        /* Grid & Inputs */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .req-star {
+            color: var(--error);
+            margin-left: 3px;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"], 
+        input[type="tel"], input[type="date"], input[type="url"], select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--surface);
+            box-shadow: 0 0 0 4px var(--primary-ring);
+        }
+
+        /* Validation Error State */
+        .error-border {
+            border-color: var(--error) !important;
+            box-shadow: 0 0 0 4px var(--error-ring) !important;
+            background-color: #fff1f2 !important;
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: -4px;
+            display: none;
+        }
+        .error-border ~ .error-message {
+            display: block;
+        }
+
+        /* Currency Input */
+        .currency-input {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+        }
+        .currency-prefix {
+            background-color: #f1f5f9;
+            color: var(--text-secondary);
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-right: none;
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        .currency-input input[type="number"] {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            width: 100%;
+        }
+
+        /* Phone Input with Type Selector */
+        .phone-input {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+        }
+        .phone-input select {
+            width: 35%;
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+            border-right: none;
+            appearance: auto;
+            cursor: pointer;
+        }
+        .phone-input input[type="tel"] {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            width: 65%;
+        }
+
+        /* Modern Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+        }
+
+        .toggle-container input {
+            display: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background-color: var(--border);
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .toggle-container input:checked + .toggle-switch {
+            background-color: var(--success);
+        }
+
+        .toggle-container input:checked + .toggle-switch::after {
+            transform: translateX(20px);
+        }
+
+        /* Dynamic Owner UI Adjustments */
+        .sub-header {
+            grid-column: 1 / -1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px dashed var(--primary);
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-ring);
+            border-style: solid;
+        }
+
+        .btn-remove {
+            background-color: transparent;
+            color: var(--error);
+            border: 1px solid var(--error);
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .btn-remove:hover {
+            background-color: #fef2f2;
+        }
+
+        /* Navigation Buttons */
+        .form-footer {
+            padding: 20px 40px 30px;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        button.nav-btn {
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-prev {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border) !important;
+            display: none; 
+        }
+
+        .btn-prev:hover {
+            background-color: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .btn-next, .btn-submit {
+            background-color: var(--primary);
+            color: white;
+            flex-grow: 1;
+        }
+
+        .btn-next:hover:not(:disabled), .btn-submit:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit {
+            display: none;
+            background-color: var(--success);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: #059669;
+        }
+
+        .btn-submit:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Test Button */
+        .test-fill-btn {
+            background: #ef4444; 
+            color: white; 
+            border: none; 
+            padding: 6px 12px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 0.8rem; 
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .test-fill-btn:hover {
+            background: #dc2626;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .app-header, .form-content, .form-footer { padding: 20px; }
+            .phone-input select { width: 40%; }
+            .phone-input input[type="tel"] { width: 60%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container" id="mainContainer">
+    <div class="app-header">
+        <div class="header-title">
+            <h2>Secure Application</h2>
+            
+            <!-- TEMPORARY TEST AUTO-FILL BUTTON -->
+            <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[TEST] Auto-Fill</button>
+            <!-- =============================== -->
+
+            <span class="step-counter" id="stepCounter">Step 1 of 4</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
+        </div>
+    </div>
+
+    <form id="modernForm" onsubmit="submitForm(event)" novalidate>
+        <div class="form-content">
+
+            <!-- STEP 1: Business Profile -->
+            <div class="form-step active" id="step1">
+                <p class="step-description">Please fill out the basic details of your business. All fields are required.</p>
+                <div class="form-grid">
+                    <div class="input-group full-width">
+                        <label for="name">Legal Business Name & DBA<span class="req-star">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="Company Inc. (DBA: Great Products)" required>
+                        <div class="error-message">This field is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cEmailAddress">Business Email<span class="req-star">*</span></label>
+                        <input type="email" id="cEmailAddress" name="cEmailAddress" placeholder="contact@company.com" required>
+                        <div class="error-message">Valid email is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cPhoneNumber">Business Phone<span class="req-star">*</span></label>
+                        <div class="phone-input">
+                            <select id="cPhoneType" name="cPhoneType" required>
+                                <option value="Work">Work</option>
+                                <option value="Mobile">Mobile</option>
+                                <option value="Home">Home</option>
+                                <option value="Fax">Fax</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input type="tel" id="cPhoneNumber" name="cPhoneNumber" placeholder="(555) 000-0000" required>
+                        </div>
+                        <div class="error-message">Phone number is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cIncorporatedDate">Incorporation Date<span class="req-star">*</span></label>
+                        <input type="date" id="cIncorporatedDate" name="cIncorporatedDate" required>
+                        <div class="error-message">Date is required</div>
+                    </div>
+                    <label class="toggle-container full-width">
+                        <span style="font-weight: 500; font-size: 0.95rem;">Operating out of a commercial space?</span>
+                        <input type="checkbox" id="cCommercialSpace" name="cCommercialSpace">
+                        <div class="toggle-switch"></div>
+                    </label>
+                    <div class="input-group full-width">
+                        <label for="cDescription">Business Description<span class="req-star">*</span></label>
+                        <textarea id="cDescription" name="cDescription" rows="3" placeholder="Briefly describe what your business does..." required></textarea>
+                        <div class="error-message">Description is required</div>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="cDocumentLink">Supporting Documentation Link<span class="req-star">*</span></label>
+                        <input type="url" id="cDocumentLink" name="cDocumentLink" placeholder="https://drive.google.com/..." required>
+                        <div class="error-message">Valid URL is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: Address & Financials -->
+            <div class="form-step" id="step2">
+                <p class="step-description">Where are you located, and what do your financials look like? All fields are required.</p>
+                <div class="form-grid">
+                    <div class="sub-header">Registered Address</div>
+                    <div class="input-group full-width">
+                        <label for="cAddressStreet">Street Address<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressStreet" name="cAddressStreet" placeholder="123 Corporate Blvd, Suite 200" required>
+                        <div class="error-message">Street address is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressCity">City<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressCity" name="cAddressCity" required>
+                        <div class="error-message">City is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressState">State / Province<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressState" name="cAddressState" required>
+                        <div class="error-message">State is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressPostalCode">Postal / Zip Code<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressPostalCode" name="cAddressPostalCode" required>
+                        <div class="error-message">Postal code is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cAddressCountry">Country<span class="req-star">*</span></label>
+                        <input type="text" id="cAddressCountry" name="cAddressCountry" required>
+                        <div class="error-message">Country is required</div>
+                    </div>
+
+                    <div class="sub-header">Financial Snapshot</div>
+                    <div class="input-group full-width">
+                        <label>Requested Opportunity Amount<span class="req-star">*</span></label>
+                        <div class="currency-input">
+                            <span class="currency-prefix">USD</span>
+                            <input type="number" id="cOpportunityAmount" name="cOpportunityAmount" step="0.01" placeholder="0.00" required>
+                        </div>
+                        <div class="error-message">Amount is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Current Annual Revenue<span class="req-star">*</span></label>
+                        <div class="currency-input">
+                            <span class="currency-prefix">USD</span>
+                            <input type="number" id="cAnnualRevenue" name="cAnnualRevenue" step="0.01" placeholder="0.00" required>
+                        </div>
+                        <div class="error-message">Amount is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Projected 2025 Revenue<span class="req-star">*</span></label>
+                        <div class="currency-input">
+                            <span class="currency-prefix">USD</span>
+                            <input type="number" id="cAnnualRevenue2025" name="cAnnualRevenue2025" step="0.01" placeholder="0.00" required>
+                        </div>
+                        <div class="error-message">Amount is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: Primary Guarantor -->
+            <div class="form-step" id="step3">
+                <p class="step-description">Personal details for the primary stakeholder of the business. All fields are required.</p>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="cSalutationName">Title<span class="req-star">*</span></label>
+                        <select id="cSalutationName" name="cSalutationName" required>
+                            <option value="">Select</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Ms.">Ms.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Dr.">Dr.</option>
+                        </select>
+                        <div class="error-message">Title is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cFirstName">First Name<span class="req-star">*</span></label>
+                        <input type="text" id="cFirstName" name="cFirstName" required>
+                        <div class="error-message">First name is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cMiddleName">Middle Name</label>
+                        <input type="text" id="cMiddleName" name="cMiddleName">
+                    </div>
+                    <div class="input-group">
+                        <label for="cLastName">Last Name<span class="req-star">*</span></label>
+                        <input type="text" id="cLastName" name="cLastName" required>
+                        <div class="error-message">Last name is required</div>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="cOwnerEmail">Personal Email<span class="req-star">*</span></label>
+                        <input type="email" id="cOwnerEmail" name="cOwnerEmail" required>
+                        <div class="error-message">Valid email is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cOwnerPhoneNumber">Direct Phone<span class="req-star">*</span></label>
+                        <div class="phone-input">
+                            <select id="cOwnerPhoneType" name="cOwnerPhoneType" required>
+                                <option value="Mobile">Mobile</option>
+                                <option value="Work">Work</option>
+                                <option value="Home">Home</option>
+                                <option value="Fax">Fax</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input type="tel" id="cOwnerPhoneNumber" name="cOwnerPhoneNumber" placeholder="(555) 000-0000" required>
+                        </div>
+                        <div class="error-message">Phone number is required</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="cFICO">Est. FICO Score<span class="req-star">*</span></label>
+                        <input type="number" id="cFICO" name="cFICO" min="300" max="850" placeholder="720" required>
+                        <div class="error-message">FICO score is required</div>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="cOwnershipPercentage">Ownership Percentage (%)<span class="req-star">*</span></label>
+                        <input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" step="0.01" min="0" max="100" placeholder="0.00" required>
+                        <div class="error-message">Ownership percentage is required</div>
+                    </div>
+                    <label class="toggle-container full-width">
+                        <span style="font-weight: 500; font-size: 0.95rem;">I currently own my home</span>
+                        <input type="checkbox" id="cDoYouOwnYourHome" name="cDoYouOwnYourHome">
+                        <div class="toggle-switch"></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- STEP 4: Additional Owners (Dynamic) -->
+            <div class="form-step" id="step4">
+                <p class="step-description">Do you have secondary partners? Add them below, or <strong>skip and submit</strong> if you are the only owner.</p>
+                
+                <!-- Owner 2 Section -->
+                <div id="owner2-section" style="display: none; margin-bottom: 25px;">
+                    <div class="sub-header flex-between">
+                        Secondary Owner Details
+                        <button type="button" class="btn-remove" onclick="removeOwner(2)">Remove</button>
+                    </div>
+                    <div class="form-grid" style="margin-top: 20px;">
+                        <div class="input-group">
+                            <label for="cOwner2FirstName">First Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner2FirstName" name="cOwner2FirstName">
+                            <div class="error-message">First name is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner2LastName">Last Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner2LastName" name="cOwner2LastName">
+                            <div class="error-message">Last name is required</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="cOwner2Email">Email<span class="req-star">*</span></label>
+                            <input type="email" id="cOwner2Email" name="cOwner2Email">
+                            <div class="error-message">Valid email is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner2PhoneNumber">Phone<span class="req-star">*</span></label>
+                            <div class="phone-input">
+                                <select id="cOwner2PhoneType" name="cOwner2PhoneType">
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Fax">Fax</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="tel" id="cOwner2PhoneNumber" name="cOwner2PhoneNumber" placeholder="(555) 000-0000">
+                            </div>
+                            <div class="error-message">Phone is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner2FICO">Est. FICO<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner2FICO" name="cOwner2FICO" min="300" max="850">
+                            <div class="error-message">FICO score is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner2OwnershipPercentage">Ownership (%)<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner2OwnershipPercentage" name="cOwner2OwnershipPercentage" step="0.01">
+                            <div class="error-message">Percentage is required</div>
+                        </div>
+                        <label class="toggle-container full-width">
+                            <span style="font-weight: 500; font-size: 0.95rem;">Homeowner</span>
+                            <input type="checkbox" id="cOwner2OwnHome" name="cOwner2OwnHome">
+                            <div class="toggle-switch"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Owner 3 Section -->
+                <div id="owner3-section" style="display: none; margin-bottom: 25px;">
+                    <div class="sub-header flex-between">
+                        Tertiary Owner Details
+                        <button type="button" class="btn-remove" onclick="removeOwner(3)">Remove</button>
+                    </div>
+                    <div class="form-grid" style="margin-top: 20px;">
+                        <div class="input-group">
+                            <label for="cOwner3FirstName">First Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner3FirstName" name="cOwner3FirstName">
+                            <div class="error-message">First name is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner3LastName">Last Name<span class="req-star">*</span></label>
+                            <input type="text" id="cOwner3LastName" name="cOwner3LastName">
+                            <div class="error-message">Last name is required</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="cOwner3Email">Email<span class="req-star">*</span></label>
+                            <input type="email" id="cOwner3Email" name="cOwner3Email">
+                            <div class="error-message">Valid email is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner3PhoneNumber">Phone<span class="req-star">*</span></label>
+                            <div class="phone-input">
+                                <select id="cOwner3PhoneType" name="cOwner3PhoneType">
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Fax">Fax</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <input type="tel" id="cOwner3PhoneNumber" name="cOwner3PhoneNumber" placeholder="(555) 000-0000">
+                            </div>
+                            <div class="error-message">Phone is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner3FICO">Est. FICO<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner3FICO" name="cOwner3FICO" min="300" max="850">
+                            <div class="error-message">FICO score is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwner3OwnershipPercentage">Ownership (%)<span class="req-star">*</span></label>
+                            <input type="number" id="cOwner3OwnershipPercentage" name="cOwner3OwnershipPercentage" step="0.01">
+                            <div class="error-message">Percentage is required</div>
+                        </div>
+                        <label class="toggle-container full-width">
+                            <span style="font-weight: 500; font-size: 0.95rem;">Homeowner</span>
+                            <input type="checkbox" id="cOwner3OwnHome" name="cOwner3OwnHome">
+                            <div class="toggle-switch"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="button" id="btnAddOwner" class="btn-outline" onclick="addOwner()">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Add Additional Owner
+                </button>
+            </div>
+
+        </div>
+
+        <div class="form-footer">
+            <button type="button" class="nav-btn btn-prev" id="btnPrev" onclick="changeStep(-1)">Back</button>
+            <button type="button" class="nav-btn btn-next" id="btnNext" onclick="changeStep(1)">Continue to Next Step</button>
+            <button type="submit" class="nav-btn btn-submit" id="btnSubmit">Securely Submit Application</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // =======================================================
+    // TEMPORARY AUTOFILL FUNCTION FOR TESTING - REMOVE LATER
+    // =======================================================
+    function autofillTestData() {
+        // Step 1
+        document.getElementById('name').value = "Acme Corp (DBA: Acme Tech)";
+        document.getElementById('cEmailAddress').value = "test@acmecorp.com";
+        document.getElementById('cPhoneType').value = "Work"; 
+        document.getElementById('cPhoneNumber').value = "555-123-4567";
+        document.getElementById('cIncorporatedDate').value = "2020-05-15";
+        document.getElementById('cCommercialSpace').checked = true;
+        document.getElementById('cDescription').value = "This is a dummy test payload generated to test the Webhook.";
+        document.getElementById('cDocumentLink').value = "https://drive.google.com/test-link";
+
+        // Step 2
+        document.getElementById('cAddressStreet').value = "123 Webhook Lane";
+        document.getElementById('cAddressCity').value = "New York";
+        document.getElementById('cAddressState').value = "NY";
+        document.getElementById('cAddressPostalCode').value = "10001";
+        document.getElementById('cAddressCountry').value = "USA";
+        
+        document.getElementById('cOpportunityAmount').value = "250000";
+        document.getElementById('cAnnualRevenue').value = "1500000";
+        document.getElementById('cAnnualRevenue2025').value = "2000000";
+
+        // Step 3
+        document.getElementById('cSalutationName').value = "Mr.";
+        document.getElementById('cFirstName').value = "John";
+        document.getElementById('cMiddleName').value = "T";
+        document.getElementById('cLastName').value = "Doe";
+        document.getElementById('cOwnerEmail').value = "johndoe@test.com";
+        document.getElementById('cOwnerPhoneType').value = "Mobile"; 
+        document.getElementById('cOwnerPhoneNumber').value = "555-987-6543";
+        document.getElementById('cFICO').value = "750";
+        document.getElementById('cOwnershipPercentage').value = "100";
+        document.getElementById('cDoYouOwnYourHome').checked = true;
+
+        // Step 4 (NEW: Automatically opens and fills Owner 2 and Owner 3)
+        addOwner(); // Opens Owner 2
+        document.getElementById('cOwner2FirstName').value = "Jane";
+        document.getElementById('cOwner2LastName').value = "Smith";
+        document.getElementById('cOwner2Email').value = "jane.smith@test.com";
+        document.getElementById('cOwner2PhoneType').value = "Mobile";
+        document.getElementById('cOwner2PhoneNumber').value = "555-000-0152";
+        document.getElementById('cOwner2FICO').value = "780";
+        document.getElementById('cOwner2OwnershipPercentage').value = "50";
+        document.getElementById('cOwner2OwnHome').checked = true;
+
+        addOwner(); // Opens Owner 3
+        document.getElementById('cOwner3FirstName').value = "Bob";
+        document.getElementById('cOwner3LastName').value = "Johnson";
+        document.getElementById('cOwner3Email').value = "bob.johnson@test.com";
+        document.getElementById('cOwner3PhoneType').value = "Work";
+        document.getElementById('cOwner3PhoneNumber').value = "789-456-1234";
+        document.getElementById('cOwner3FICO').value = "800";
+        document.getElementById('cOwner3OwnershipPercentage').value = "25";
+        document.getElementById('cOwner3OwnHome').checked = false;
+
+        // Clear any red error borders
+        document.querySelectorAll('input, select, textarea').forEach(el => el.classList.remove('error-border'));
+        
+        // Hide button so you know it was clicked
+        document.getElementById('testFillBtn').innerText = "All Data Filled ✓";
+        document.getElementById('testFillBtn').style.background = "#10b981";
+    }
+    // =======================================================
+
+    let currentStep = 0;
+    const steps = document.querySelectorAll('.form-step');
+    const btnNext = document.getElementById('btnNext');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const progressFill = document.getElementById('progressFill');
+    const stepCounter = document.getElementById('stepCounter');
+
+    let owner2Visible = false;
+    let owner3Visible = false;
+
+    // Remove red outlines when typing or selecting
+    document.querySelectorAll('input, select, textarea').forEach(element => {
+        element.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                this.classList.remove('error-border');
+            }
+        });
+    });
+
+    function setInputsRequired(section, isRequired) {
+        const inputs = section.querySelectorAll('input:not([type="checkbox"]), select');
+        inputs.forEach(input => {
+            if (isRequired) {
+                input.setAttribute('required', 'true');
+            } else {
+                input.removeAttribute('required');
+                input.classList.remove('error-border');
+            }
+        });
+    }
+
+    function addOwner() {
+        if (!owner2Visible) {
+            const sec = document.getElementById('owner2-section');
+            sec.style.display = 'block';
+            setInputsRequired(sec, true);
+            owner2Visible = true;
+        } else if (!owner3Visible) {
+            const sec = document.getElementById('owner3-section');
+            sec.style.display = 'block';
+            setInputsRequired(sec, true);
+            owner3Visible = true;
+            document.getElementById('btnAddOwner').style.display = 'none';
+        }
+    }
+
+    function hideAndClearOwner(num) {
+        const sec = document.getElementById(`owner${num}-section`);
+        sec.style.display = 'none';
+        setInputsRequired(sec, false);
+        
+        if (num === 2) owner2Visible = false;
+        if (num === 3) owner3Visible = false;
+        
+        const inputs = sec.querySelectorAll('input');
+        inputs.forEach(input => {
+            if (input.type === 'checkbox') input.checked = false;
+            else input.value = '';
+        });
+        
+        // Reset the phone type select to default
+        const selects = sec.querySelectorAll('select');
+        selects.forEach(select => {
+            select.value = "Mobile";
+        });
+    }
+
+    function removeOwner(num) {
+        if (num === 2) {
+            if (owner3Visible) {
+                document.getElementById('cOwner2FirstName').value = document.getElementById('cOwner3FirstName').value;
+                document.getElementById('cOwner2LastName').value = document.getElementById('cOwner3LastName').value;
+                document.getElementById('cOwner2Email').value = document.getElementById('cOwner3Email').value;
+                document.getElementById('cOwner2PhoneType').value = document.getElementById('cOwner3PhoneType').value;
+                document.getElementById('cOwner2PhoneNumber').value = document.getElementById('cOwner3PhoneNumber').value;
+                document.getElementById('cOwner2FICO').value = document.getElementById('cOwner3FICO').value;
+                document.getElementById('cOwner2OwnershipPercentage').value = document.getElementById('cOwner3OwnershipPercentage').value;
+                document.getElementById('cOwner2OwnHome').checked = document.getElementById('cOwner3OwnHome').checked;
+                hideAndClearOwner(3);
+            } else {
+                hideAndClearOwner(2);
+            }
+        } else if (num === 3) {
+            hideAndClearOwner(3);
+        }
+        document.getElementById('btnAddOwner').style.display = 'flex';
+    }
+
+    function validateCurrentStep() {
+        const currentStepEl = steps[currentStep];
+        const requiredInputs = currentStepEl.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredInputs.forEach(input => {
+            if (input.value.trim() === '') {
+                input.classList.add('error-border');
+                isValid = false;
+            } else {
+                input.classList.remove('error-border');
+                if (input.type === 'email' && !input.value.includes('@')) {
+                    input.classList.add('error-border');
+                    isValid = false;
+                }
+            }
+        });
+        return isValid;
+    }
+
+    function updateUI() {
+        steps.forEach((step, index) => {
+            step.classList.toggle('active', index === currentStep);
+        });
+
+        const progressPercentage = ((currentStep + 1) / steps.length) * 100;
+        progressFill.style.width = `${progressPercentage}%`;
+        stepCounter.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+
+        btnPrev.style.display = currentStep === 0 ? 'none' : 'block';
+        
+        if (currentStep === steps.length - 1) {
+            btnNext.style.display = 'none';
+            btnSubmit.style.display = 'block';
+        } else {
+            btnNext.style.display = 'block';
+            btnSubmit.style.display = 'none';
+        }
+
+        if (currentStep > 0) {
+            document.querySelector('.app-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    function changeStep(direction) {
+        if (direction === 1) {
+            if (!validateCurrentStep()) return; 
+        }
+        currentStep += direction;
+        if (currentStep < 0) currentStep = 0;
+        if (currentStep >= steps.length) currentStep = steps.length - 1;
+        updateUI();
+    }
+
+    // --- Webhook Submission Logic ---
+    function submitForm(event) {
+        event.preventDefault(); // Stop normal form submission
+
+        if (!validateCurrentStep()) return;
+
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = "Sending to Webhook...";
+
+        const form = document.getElementById("modernForm");
+        const formData = new FormData(form);
+        
+        const getNum = (val) => {
+            if (!val) return null;
+            const cleaned = val.toString().replace(/,/g, '');
+            return parseFloat(cleaned) || null;
+        };
+        
+        const getBool = (id) => {
+            const el = document.getElementById(id);
+            return el ? el.checked : false;
+        };
+
+        // Helper to format phone data into an array of objects
+        const getPhoneArray = (numParam, typeParam) => {
+            const num = formData.get(numParam) || "";
+            const type = formData.get(typeParam) || "Mobile";
+            return[{"phoneNumber": num, "type": type}];
+        };
+
+        const owner2First = formData.get("cOwner2FirstName") || "";
+        const owner2Last = formData.get("cOwner2LastName") || "";
+        const owner2FullName = (owner2First + " " + owner2Last).trim();
+
+        const owner3First = formData.get("cOwner3FirstName") || "";
+        const owner3Last = formData.get("cOwner3LastName") || "";
+        const owner3FullName = (owner3First + " " + owner3Last).trim();
+
+        const payload = {
+            "name": formData.get("name"),
+            "cBusinessNameAndDBAIfApplicable": formData.get("name"),
+            "cEmailAddress": formData.get("cEmailAddress"),
+            
+            // Format phone as Array of Objects
+            "cPhoneNumber": getPhoneArray("cPhoneNumber", "cPhoneType"),
+            
+            "cOpportunityAmountCurrency": "USD",
+            "cOpportunityAmount": getNum(formData.get("cOpportunityAmount")),
+            "cAnnualRevenueCurrency": "USD",
+            "cAnnualRevenue": getNum(formData.get("cAnnualRevenue")),
+            "cAnnualRevenue2025Currency": "USD",
+            "cAnnualRevenue2025": getNum(formData.get("cAnnualRevenue2025")),
+            
+            "cIncorporatedDate": formData.get("cIncorporatedDate"),
+            "cAddressStreet": formData.get("cAddressStreet"),
+            "cAddressCity": formData.get("cAddressCity"),
+            "cAddressState": formData.get("cAddressState"),
+            "cAddressCountry": formData.get("cAddressCountry"),
+            "cAddressPostalCode": formData.get("cAddressPostalCode"),
+            "cAddressMap": "", 
+            "cCommercialSpace": getBool("cCommercialSpace"),
+            "cDescription": formData.get("cDescription"),
+            "cSalutationName": formData.get("cSalutationName"),
+            "cFirstName": formData.get("cFirstName"),
+            "cLastName": formData.get("cLastName"),
+            "cMiddleName": formData.get("cMiddleName") || "",
+            
+            // Format phone as Array of Objects
+            "cOwnerPhoneNumber": getPhoneArray("cOwnerPhoneNumber", "cOwnerPhoneType"),
+            
+            "cOwnerEmail": formData.get("cOwnerEmail"),
+            "cFICO": getNum(formData.get("cFICO")),
+            "cOwnershipPercentage": getNum(formData.get("cOwnershipPercentage")),
+            "cDoYouOwnYourHome": getBool("cDoYouOwnYourHome"),
+            "cDocumentLink": formData.get("cDocumentLink"),
+            
+            "cOwner2FirstName": owner2First,
+            "cOwner2LastName": owner2Last,
+            "cOwner2Name": owner2FullName,
+            
+            // Format phone as Array of Objects
+            "cOwner2PhoneNumber": getPhoneArray("cOwner2PhoneNumber", "cOwner2PhoneType"),
+            
+            "cOwner2Email": formData.get("cOwner2Email") || "",
+            "cOwner2FICO": getNum(formData.get("cOwner2FICO")),
+            "cOwner2OwnershipPercentage": getNum(formData.get("cOwner2OwnershipPercentage")),
+            "cOwner2OwnHome": getBool("cOwner2OwnHome"),
+            
+            "cOwner3FirstName": owner3First,
+            "cOwner3LastName": owner3Last,
+            "cOwner3Name": owner3FullName,
+            
+            // Format phone as Array of Objects
+            "cOwner3PhoneNumber": getPhoneArray("cOwner3PhoneNumber", "cOwner3PhoneType"),
+            
+            "cOwner3Email": formData.get("cOwner3Email") || "",
+            "cOwner3FICO": getNum(formData.get("cOwner3FICO")),
+            "cOwner3OwnershipPercentage": getNum(formData.get("cOwner3OwnershipPercentage")),
+            "cOwner3OwnHome": getBool("cOwner3OwnHome")
+        };
+
+        // Send payload via Webhook
+        fetch("https://api-69a90979af1be5a90.bizioffice.com/webhook/56d4a958-9f72-4228-ae4f-4f2c71dc32a0", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if(response.ok) {
+                // Render Success Screen
+                document.getElementById('mainContainer').innerHTML = `
+                    <div style="padding: 60px 40px; text-align: center; background: #ffffff;">
+                        <svg style="color: #10b981; width: 72px; height: 72px; margin: 0 auto 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: #0f172a;">Webhook Hit Successfully!</h2>
+                        <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">Your application data has been sent to the endpoint. Check your Webhook catcher.</p>
+                    </div>
+                `;
+            } else {
+                throw new Error("Endpoint rejected the request (Status: " + response.status + ")");
+            }
+        })
+        .catch(error => {
+            console.error("Webhook Error:", error);
+            
+            if(error.message.includes("Failed to fetch")) {
+                alert("Network Error: This is likely a CORS block by your browser (if you opened this file directly from your computer). The webhook requires the request to originate from an allowed domain, or you need to configure your webhook catcher to allow all origins ('Access-Control-Allow-Origin: *'). Check the F12 Console for details.");
+            } else {
+                alert("Error sending to Webhook: " + error.message);
+            }
+            
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = "Securely Submit Application";
+        });
+    }
+</script>
+
+</body>
+</html>
