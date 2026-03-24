@@ -163,7 +163,7 @@
             display: block;
             width: 100%;
             max-width: 100%; /* Ensure no overflow */
-            min-height: 50px; /* Guarantees box won't collapse (fixes the date issue) */
+            min-height: 50px; 
             padding: 14px 16px;
             background-color: var(--input-bg);
             border: 1px solid var(--border);
@@ -448,7 +448,7 @@
                 box-shadow: none;
             }
             .form-grid { 
-                /* THE FIX: Using minmax(0, 1fr) strictly prevents elements from blowing out the grid width */
+                /* Using minmax(0, 1fr) strictly prevents elements from blowing out the grid width */
                 grid-template-columns: minmax(0, 1fr); 
                 gap: 16px;
             }
@@ -484,7 +484,6 @@
 <div class="app-container" id="mainContainer">
     <div class="app-header">
         
-        <!-- Restructured Header to prevent stacking on Mobile -->
         <div class="header-top-row">
             <h2>Secure Application</h2>
             <span class="step-counter" id="stepCounter">Step 1 of 4</span>
@@ -1126,7 +1125,6 @@
                         <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">Thank you. Your secure application has been transmitted successfully to our team for review.</p>
                     </div>
                 `;
-                // Scroll up so user sees success message on mobile
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 throw new Error("Endpoint rejected the request (Status: " + response.status + ")");
@@ -1136,7 +1134,7 @@
             console.error("Webhook Error:", error);
             
             if(error.message.includes("Failed to fetch")) {
-                alert("Network Error: This is likely a CORS block by your browser (if you opened this file directly from your computer). The webhook requires the request to originate from an allowed domain, or you need to configure your webhook catcher to allow all origins ('Access-Control-Allow-Origin: *'). Check the F12 Console for details.");
+                alert("Network Error: This is likely a CORS block by your browser. Ensure your webhook allows cross-origin requests.");
             } else {
                 alert("Error sending to Webhook: " + error.message);
             }
