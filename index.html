@@ -52,6 +52,7 @@
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
             overflow: hidden;
             border: 1px solid var(--border);
+            position: relative; /* For sticky footer */
         }
 
         /* Header & Progress Bar */
@@ -65,6 +66,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .header-title h2 {
@@ -87,6 +90,7 @@
             background: var(--input-bg);
             border-radius: 10px;
             overflow: hidden;
+            width: 100%;
         }
 
         .progress-fill {
@@ -139,7 +143,7 @@
         }
 
         label {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-secondary);
         }
@@ -149,6 +153,7 @@
             margin-left: 3px;
         }
 
+        /* Set to explicitly 16px to prevent iOS Safari Auto-Zoom on focus */
         input[type="text"], input[type="email"], input[type="number"], 
         input[type="tel"], input[type="date"], input[type="url"], select, textarea {
             width: 100%;
@@ -158,8 +163,9 @@
             border-radius: var(--radius-md);
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: 16px !important; 
             transition: var(--transition);
+            box-sizing: border-box;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -178,7 +184,7 @@
         
         .error-message {
             color: var(--error);
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 500;
             margin-top: -4px;
             display: none;
@@ -187,11 +193,12 @@
             display: block;
         }
 
-        /* Currency Input */
+        /* Combined Currency & Amount Input */
         .currency-input {
             display: flex;
             align-items: stretch;
             gap: 0;
+            width: 100%;
         }
         .currency-prefix {
             background-color: #f1f5f9;
@@ -201,13 +208,15 @@
             border-right: none;
             border-radius: var(--radius-md) 0 0 var(--radius-md);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 16px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            flex: 0 0 70px;
         }
         .currency-input input[type="number"] {
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            width: 100%;
+            flex: 1;
         }
 
         /* Phone Input with Type Selector */
@@ -215,17 +224,19 @@
             display: flex;
             align-items: stretch;
             gap: 0;
+            width: 100%;
         }
         .phone-input select {
-            width: 35%;
+            flex: 0 0 100px;
             border-radius: var(--radius-md) 0 0 var(--radius-md);
             border-right: none;
             appearance: auto;
             cursor: pointer;
+            padding-right: 25px; /* Room for native dropdown arrow */
         }
         .phone-input input[type="tel"] {
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            width: 65%;
+            flex: 1;
         }
 
         /* Modern Toggle Switch */
@@ -279,8 +290,8 @@
             grid-column: 1 / -1;
             font-size: 1.1rem;
             font-weight: 600;
-            margin-top: 20px;
-            padding-bottom: 10px;
+            margin-top: 15px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--border);
             color: var(--text-primary);
         }
@@ -348,6 +359,7 @@
             cursor: pointer;
             transition: var(--transition);
             border: none;
+            min-height: 48px; /* High accessibility touch target */
         }
 
         .btn-prev {
@@ -399,16 +411,50 @@
             font-size: 0.8rem; 
             font-weight: bold;
             transition: all 0.2s;
+            height: fit-content;
         }
         .test-fill-btn:hover {
             background: #dc2626;
         }
 
+        /* =========================================
+           MOBILE OPTIMIZATION (RESPONSIVE MEDIA QUERY)
+           ========================================= */
         @media (max-width: 600px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .app-header, .form-content, .form-footer { padding: 20px; }
-            .phone-input select { width: 40%; }
-            .phone-input input[type="tel"] { width: 60%; }
+            body { 
+                padding: 0; /* Remove body padding so container spans full screen */
+                background-color: var(--surface);
+            }
+            .app-container {
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .form-grid { 
+                grid-template-columns: 1fr; /* Stack everything vertically */
+                gap: 16px;
+            }
+            .app-header { 
+                padding: 20px 20px 15px; 
+                position: sticky;
+                top: 0;
+                background: var(--surface);
+                z-index: 10;
+            }
+            .header-title h2 { font-size: 1.3rem; }
+            .form-content { 
+                padding: 10px 20px 30px; 
+            }
+            
+            /* Sticky Mobile Footer */
+            .form-footer { 
+                padding: 15px 20px; 
+                position: sticky;
+                bottom: 0;
+                background: var(--surface);
+                box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+                z-index: 10;
+            }
         }
     </style>
 </head>
@@ -577,7 +623,7 @@
                         <input type="email" id="cOwnerEmail" name="cOwnerEmail" required>
                         <div class="error-message">Valid email is required</div>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group full-width">
                         <label for="cOwnerPhoneNumber">Direct Phone<span class="req-star">*</span></label>
                         <div class="phone-input">
                             <select id="cOwnerPhoneType" name="cOwnerPhoneType" required>
@@ -596,7 +642,7 @@
                         <input type="number" id="cFICO" name="cFICO" min="300" max="850" placeholder="720" required>
                         <div class="error-message">FICO score is required</div>
                     </div>
-                    <div class="input-group full-width">
+                    <div class="input-group">
                         <label for="cOwnershipPercentage">Ownership Percentage (%)<span class="req-star">*</span></label>
                         <input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" step="0.01" min="0" max="100" placeholder="0.00" required>
                         <div class="error-message">Ownership percentage is required</div>
@@ -631,12 +677,12 @@
                             <div class="error-message">Last name is required</div>
                         </div>
                         
-                        <div class="input-group">
+                        <div class="input-group full-width">
                             <label for="cOwner2Email">Email<span class="req-star">*</span></label>
                             <input type="email" id="cOwner2Email" name="cOwner2Email">
                             <div class="error-message">Valid email is required</div>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group full-width">
                             <label for="cOwner2PhoneNumber">Phone<span class="req-star">*</span></label>
                             <div class="phone-input">
                                 <select id="cOwner2PhoneType" name="cOwner2PhoneType">
@@ -686,12 +732,12 @@
                             <div class="error-message">Last name is required</div>
                         </div>
                         
-                        <div class="input-group">
+                        <div class="input-group full-width">
                             <label for="cOwner3Email">Email<span class="req-star">*</span></label>
                             <input type="email" id="cOwner3Email" name="cOwner3Email">
                             <div class="error-message">Valid email is required</div>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group full-width">
                             <label for="cOwner3PhoneNumber">Phone<span class="req-star">*</span></label>
                             <div class="phone-input">
                                 <select id="cOwner3PhoneType" name="cOwner3PhoneType">
@@ -845,12 +891,15 @@
             sec.style.display = 'block';
             setInputsRequired(sec, true);
             owner2Visible = true;
+            // Scroll to the new section
+            sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else if (!owner3Visible) {
             const sec = document.getElementById('owner3-section');
             sec.style.display = 'block';
             setInputsRequired(sec, true);
             owner3Visible = true;
             document.getElementById('btnAddOwner').style.display = 'none';
+            sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
@@ -935,14 +984,22 @@
             btnSubmit.style.display = 'none';
         }
 
-        if (currentStep > 0) {
+        // Scroll gracefully to top of form when navigating steps
+        if (currentStep > 0 || currentStep === 0) {
             document.querySelector('.app-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
     function changeStep(direction) {
         if (direction === 1) {
-            if (!validateCurrentStep()) return; 
+            if (!validateCurrentStep()) {
+                // If invalid, scroll to the first error
+                const firstError = steps[currentStep].querySelector('.error-border');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return; 
+            }
         }
         currentStep += direction;
         if (currentStep < 0) currentStep = 0;
@@ -973,27 +1030,18 @@
             return el ? el.checked : false;
         };
 
-        // Helper to format phone data into an array of objects
         const getPhoneArray = (numParam, typeParam) => {
             const num = formData.get(numParam) || "";
+            if (!num) return[];
             const type = formData.get(typeParam) || "Mobile";
             return[{"phoneNumber": num, "type": type}];
         };
-
-        const owner2First = formData.get("cOwner2FirstName") || "";
-        const owner2Last = formData.get("cOwner2LastName") || "";
-        const owner2FullName = (owner2First + " " + owner2Last).trim();
-
-        const owner3First = formData.get("cOwner3FirstName") || "";
-        const owner3Last = formData.get("cOwner3LastName") || "";
-        const owner3FullName = (owner3First + " " + owner3Last).trim();
 
         const payload = {
             "name": formData.get("name"),
             "cBusinessNameAndDBAIfApplicable": formData.get("name"),
             "cEmailAddress": formData.get("cEmailAddress"),
             
-            // Format phone as Array of Objects
             "cPhoneNumber": getPhoneArray("cPhoneNumber", "cPhoneType"),
             
             "cOpportunityAmountCurrency": "USD",
@@ -1017,39 +1065,32 @@
             "cLastName": formData.get("cLastName"),
             "cMiddleName": formData.get("cMiddleName") || "",
             
-            // Format phone as Array of Objects
             "cOwnerPhoneNumber": getPhoneArray("cOwnerPhoneNumber", "cOwnerPhoneType"),
-            
             "cOwnerEmail": formData.get("cOwnerEmail"),
             "cFICO": getNum(formData.get("cFICO")),
             "cOwnershipPercentage": getNum(formData.get("cOwnershipPercentage")),
             "cDoYouOwnYourHome": getBool("cDoYouOwnYourHome"),
             "cDocumentLink": formData.get("cDocumentLink"),
             
-            "cOwner2FirstName": owner2First,
-            "cOwner2LastName": owner2Last,
-            "cOwner2Name": owner2FullName,
-            
-            // Format phone as Array of Objects
+            // Note: Combined "Name" keys have been permanently removed
+            "cOwner2FirstName": formData.get("cOwner2FirstName") || "",
+            "cOwner2LastName": formData.get("cOwner2LastName") || "",
             "cOwner2PhoneNumber": getPhoneArray("cOwner2PhoneNumber", "cOwner2PhoneType"),
-            
             "cOwner2Email": formData.get("cOwner2Email") || "",
             "cOwner2FICO": getNum(formData.get("cOwner2FICO")),
             "cOwner2OwnershipPercentage": getNum(formData.get("cOwner2OwnershipPercentage")),
             "cOwner2OwnHome": getBool("cOwner2OwnHome"),
             
-            "cOwner3FirstName": owner3First,
-            "cOwner3LastName": owner3Last,
-            "cOwner3Name": owner3FullName,
-            
-            // Format phone as Array of Objects
+            "cOwner3FirstName": formData.get("cOwner3FirstName") || "",
+            "cOwner3LastName": formData.get("cOwner3LastName") || "",
             "cOwner3PhoneNumber": getPhoneArray("cOwner3PhoneNumber", "cOwner3PhoneType"),
-            
             "cOwner3Email": formData.get("cOwner3Email") || "",
             "cOwner3FICO": getNum(formData.get("cOwner3FICO")),
             "cOwner3OwnershipPercentage": getNum(formData.get("cOwner3OwnershipPercentage")),
             "cOwner3OwnHome": getBool("cOwner3OwnHome")
         };
+
+        console.log("Sending the following Payload to BiziOffice:", payload);
 
         // Send payload via Webhook
         fetch("https://api-69a90979af1be5a90.bizioffice.com/webhook/56d4a958-9f72-4228-ae4f-4f2c71dc32a0", {
@@ -1063,14 +1104,16 @@
             if(response.ok) {
                 // Render Success Screen
                 document.getElementById('mainContainer').innerHTML = `
-                    <div style="padding: 60px 40px; text-align: center; background: #ffffff;">
+                    <div style="padding: 60px 20px; text-align: center; background: #ffffff;">
                         <svg style="color: #10b981; width: 72px; height: 72px; margin: 0 auto 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: #0f172a;">Webhook Hit Successfully!</h2>
-                        <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">Your application data has been sent to the endpoint. Check your Webhook catcher.</p>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: #0f172a;">Application Submitted</h2>
+                        <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">Thank you. Your secure application has been transmitted successfully to our team for review.</p>
                     </div>
                 `;
+                // Scroll up so user sees success message on mobile
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 throw new Error("Endpoint rejected the request (Status: " + response.status + ")");
             }
