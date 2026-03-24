@@ -61,18 +61,17 @@
             border-bottom: 1px solid var(--border);
         }
         
-        .header-title {
+        .header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
+            margin-bottom: 12px;
         }
 
-        .header-title h2 {
+        .header-top-row h2 {
             font-size: 1.5rem;
             font-weight: 600;
+            margin: 0;
         }
 
         .step-counter {
@@ -83,6 +82,7 @@
             font-weight: 500;
             color: var(--text-secondary);
             border: 1px solid var(--border);
+            white-space: nowrap; /* Prevents text from stacking on itself on mobile */
         }
 
         .progress-bar {
@@ -91,6 +91,7 @@
             border-radius: 10px;
             overflow: hidden;
             width: 100%;
+            margin-top: 15px;
         }
 
         .progress-fill {
@@ -140,6 +141,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            min-width: 0; /* Extremely important: stops fields from blowing out mobile width */
         }
 
         label {
@@ -153,10 +155,11 @@
             margin-left: 3px;
         }
 
-        /* Set to explicitly 16px to prevent iOS Safari Auto-Zoom on focus */
+        /* Explicit 16px to prevent iOS Safari Auto-Zoom */
         input[type="text"], input[type="email"], input[type="number"], 
         input[type="tel"], input[type="date"], input[type="url"], select, textarea {
             width: 100%;
+            max-width: 100%; /* Ensure no overflow */
             padding: 14px 16px;
             background-color: var(--input-bg);
             border: 1px solid var(--border);
@@ -199,6 +202,7 @@
             align-items: stretch;
             gap: 0;
             width: 100%;
+            min-width: 0;
         }
         .currency-prefix {
             background-color: #f1f5f9;
@@ -217,6 +221,7 @@
         .currency-input input[type="number"] {
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             flex: 1;
+            min-width: 0;
         }
 
         /* Phone Input with Type Selector */
@@ -225,6 +230,7 @@
             align-items: stretch;
             gap: 0;
             width: 100%;
+            min-width: 0;
         }
         .phone-input select {
             flex: 0 0 100px;
@@ -233,10 +239,12 @@
             appearance: auto;
             cursor: pointer;
             padding-right: 25px; /* Room for native dropdown arrow */
+            min-width: 0;
         }
         .phone-input input[type="tel"] {
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
             flex: 1;
+            min-width: 0;
         }
 
         /* Modern Toggle Switch */
@@ -412,6 +420,7 @@
             font-weight: bold;
             transition: all 0.2s;
             height: fit-content;
+            display: inline-block;
         }
         .test-fill-btn:hover {
             background: #dc2626;
@@ -441,7 +450,7 @@
                 background: var(--surface);
                 z-index: 10;
             }
-            .header-title h2 { font-size: 1.3rem; }
+            .header-top-row h2 { font-size: 1.3rem; }
             .form-content { 
                 padding: 10px 20px 30px; 
             }
@@ -455,6 +464,9 @@
                 box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
                 z-index: 10;
             }
+            
+            .phone-input select { width: 40%; flex: 0 0 40%; }
+            .phone-input input[type="tel"] { width: 60%; flex: 1; }
         }
     </style>
 </head>
@@ -462,15 +474,17 @@
 
 <div class="app-container" id="mainContainer">
     <div class="app-header">
-        <div class="header-title">
+        
+        <!-- Restructured Header to prevent stacking on Mobile -->
+        <div class="header-top-row">
             <h2>Secure Application</h2>
-            
-            <!-- TEMPORARY TEST AUTO-FILL BUTTON -->
-            <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[TEST] Auto-Fill</button>
-            <!-- =============================== -->
-
             <span class="step-counter" id="stepCounter">Step 1 of 4</span>
         </div>
+        
+        <!-- TEMPORARY TEST AUTO-FILL BUTTON -->
+        <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[TEST] Auto-Fill</button>
+        <!-- =============================== -->
+        
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
         </div>
