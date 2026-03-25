@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Secure Application Profile</title>
+    <title>NexTech Business Solutions | Secure Application</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Modern App Variables */
         :root {
@@ -16,15 +16,15 @@
             --text-secondary: #475569;
             --border: #cbd5e1;
             --input-bg: #f8fafc;
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --primary-ring: rgba(37, 99, 235, 0.2);
+            --primary: #000000; /* NexTech Black */
+            --primary-hover: #333333;
+            --primary-ring: rgba(0, 0, 0, 0.15);
             --success: #10b981;
             --error: #ef4444;
             --error-ring: rgba(239, 68, 68, 0.15);
             --radius-md: 14px;
             --radius-lg: 24px;
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         *, *::before, *::after {
@@ -35,12 +35,16 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
+            /* Adds a subtle, premium ambient background pattern */
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
             color: var(--text-primary);
             line-height: 1.5;
             display: flex;
             justify-content: center;
             padding: 40px 20px;
             margin: 0;
+            min-height: 100vh;
         }
 
         .app-container {
@@ -48,12 +52,192 @@
             max-width: 650px;
             background: var(--surface);
             border-radius: var(--radius-lg);
-            box-shadow: 0 12px 30px -10px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Glass edge effect */
             position: relative;
+            overflow: hidden;
+            align-self: flex-start;
         }
 
-        /* Clean Header */
+        /* =========================================
+           MODERN LANDING PAGE STYLES
+           ========================================= */
+        #landingPage {
+            padding: 60px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .brand-logo {
+            max-width: 240px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .fallback-logo {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: -1px;
+            color: #000;
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+        .fallback-logo span {
+            display: block;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 8px;
+            color: var(--text-secondary);
+        }
+
+        .landing-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        /* Premium gradient text effect */
+        .landing-title span {
+            background: linear-gradient(135deg, #000000 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .landing-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            max-width: 480px;
+            line-height: 1.6;
+        }
+
+        /* Preparation Checklist - Great UX addition */
+        .prep-box {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            width: 100%;
+            max-width: 480px;
+            text-align: left;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 6px -4px rgba(0,0,0,0.05);
+        }
+
+        .prep-box h3 {
+            margin: 0 0 15px 0;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .prep-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .prep-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .prep-list li svg {
+            color: var(--success);
+            flex-shrink: 0;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 500px;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .trust-badge svg {
+            color: #94a3b8;
+        }
+
+        .btn-start {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Micro-interaction for the arrow */
+        .btn-start svg {
+            transition: transform 0.3s ease;
+        }
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.4);
+            background-color: var(--primary-hover);
+        }
+        .btn-start:hover svg {
+            transform: translateX(5px);
+        }
+        .btn-start:active {
+            transform: scale(0.98);
+        }
+
+        .privacy-microcopy {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 20px;
+            max-width: 300px;
+        }
+
+        /* =========================================
+           FORM STYLES
+           ========================================= */
+        #formWrapper {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
         .app-header {
             padding: 30px 35px 20px;
             border-bottom: 1px solid var(--border);
@@ -99,15 +283,11 @@
             transition: width 0.5s ease-in-out;
         }
 
-        /* Smooth Form Steps */
         .form-content {
             padding: 30px 35px;
         }
 
-        .form-step {
-            display: none;
-        }
-
+        .form-step { display: none; }
         .form-step.active {
             display: block;
             animation: slideFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -117,6 +297,10 @@
             from { opacity: 0; transform: translateX(15px); }
             to { opacity: 1; transform: translateX(0); }
         }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
         .step-description {
             color: var(--text-secondary);
@@ -124,7 +308,6 @@
             font-size: 0.95rem;
         }
 
-        /* Desktop Grid */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -151,7 +334,6 @@
 
         .req-star { color: var(--error); margin-left: 3px; }
 
-        /* Premium Inputs */
         input[type="text"], input[type="email"], input[type="number"], 
         input[type="tel"], input[type="date"], input[type="url"], select, textarea {
             width: 100%;
@@ -162,14 +344,13 @@
             border-radius: var(--radius-md);
             color: var(--text-primary);
             font-family: inherit;
-            font-size: 16px !important; /* Absolute necessity to prevent iOS Zoom */
+            font-size: 16px !important; 
             transition: var(--transition);
             -webkit-appearance: none;
             appearance: none;
             box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset;
         }
 
-        /* Custom Select Arrow */
         select {
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
@@ -200,7 +381,6 @@
         }
         .error-border ~ .error-message { display: block; }
 
-        /* Combined Add-ons (Currency / Phone) */
         .currency-input, .phone-input {
             display: flex;
             align-items: stretch;
@@ -236,7 +416,6 @@
             box-shadow: none;
         }
 
-        /* iOS Style Toggle */
         .toggle-container {
             display: flex;
             align-items: center;
@@ -275,7 +454,6 @@
         .toggle-container input:checked + .toggle-switch { background-color: var(--success); }
         .toggle-container input:checked + .toggle-switch::after { transform: translateX(22px); }
 
-        /* Owner Cards (UI Upgrade) */
         .owner-card {
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -298,11 +476,10 @@
             margin-bottom: 15px;
         }
 
-        /* Buttons */
         .btn-outline {
             background-color: transparent;
             color: var(--primary);
-            border: 2px dashed #93c5fd;
+            border: 2px dashed var(--border);
             padding: 14px 24px;
             font-size: 1rem;
             font-weight: 600;
@@ -316,7 +493,7 @@
             gap: 8px;
             margin-top: 15px;
         }
-        .btn-outline:hover { background-color: #eff6ff; border-color: var(--primary); }
+        .btn-outline:hover { background-color: #f8fafc; border-color: var(--primary); }
 
         .btn-remove {
             background-color: transparent;
@@ -355,15 +532,14 @@
 
         .btn-prev { background: #f1f5f9; color: var(--text-secondary); display: none; width: 30%; }
         .btn-prev:hover { background: #e2e8f0; color: var(--text-primary); }
-        .btn-next, .btn-submit { background: var(--primary); color: white; flex: 1; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2); }
+        .btn-next, .btn-submit { background: var(--primary); color: white; flex: 1; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); }
         .btn-next:active, .btn-submit:active { transform: scale(0.98); }
         .btn-submit { display: none; background: var(--success); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2); }
 
-        /* Subtle Test Badge */
         .test-fill-btn {
-            background: #f1f5f9; 
-            color: #64748b; 
-            border: 1px solid #e2e8f0; 
+            background: #ef4444; 
+            color: white; 
+            border: none; 
             padding: 4px 10px; 
             border-radius: 6px; 
             cursor: pointer; 
@@ -371,22 +547,21 @@
             font-weight: 600;
             transition: all 0.2s;
         }
-        .test-fill-btn:hover { background: #e2e8f0; color: #0f172a; }
+        .test-fill-btn:hover { background: #dc2626; color: #fff; }
 
         /* =========================================
-           ULTIMATE MOBILE OPTIMIZATION
+           MOBILE OPTIMIZATION
            ========================================= */
         @media (max-width: 600px) {
-            body { 
-                padding: 0; 
-                background-color: var(--surface);
-            }
-            .app-container { 
-                border: none; 
-                border-radius: 0; 
-                box-shadow: none; 
-            }
+            body { padding: 0; background-color: var(--surface); }
+            .app-container { border: none; border-radius: 0; box-shadow: none; }
             
+            /* Landing Page Adjustments */
+            #landingPage { padding: 40px 20px; min-height: 100vh; justify-content: center;}
+            .brand-logo { max-width: 200px; }
+            .landing-title { font-size: 1.8rem; }
+            .trust-badges { flex-direction: column; align-items: center; gap: 12px; }
+
             /* Sticky Header */
             .app-header { 
                 padding: 20px 20px 15px; 
@@ -397,22 +572,14 @@
                 z-index: 50;
             }
             .header-top-row h2 { font-size: 1.3rem; }
-            .form-content { padding: 10px 20px 40px; }
-            
-            /* Flexbox Column perfectly aligns mobile items */
-            .form-grid { 
-                display: flex; 
-                flex-direction: column; 
-                gap: 18px; 
-            }
-            
-            /* Owner Card Adjustments */
+            .form-content { padding: 10px 20px 40px; width: 100%; }
+            .form-grid { display: flex; flex-direction: column; gap: 18px; }
             .owner-card { padding: 18px 15px; border-radius: 12px; margin-bottom: 20px; }
 
-            /* Sticky Action Footer with Safe Area (iPhone X/11/12/13/14/15 fix) */
+            /* Sticky Action Footer */
             .form-footer { 
                 padding: 15px 20px;
-                padding-bottom: calc(15px + env(safe-area-inset-bottom)); /* Pushes above iOS Home Bar */
+                padding-bottom: calc(15px + env(safe-area-inset-bottom)); 
                 position: sticky; 
                 bottom: 0; 
                 background: rgba(255, 255, 255, 0.95);
@@ -420,7 +587,6 @@
                 box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
                 z-index: 50;
             }
-            
             .phone-input select { flex: 0 0 38%; }
         }
     </style>
@@ -428,325 +594,407 @@
 <body>
 
 <div class="app-container" id="mainContainer">
-    <div class="app-header">
-        <div class="header-top-row">
-            <h2>Secure Application</h2>
-            <span class="step-counter" id="stepCounter">Step 1 of 4</span>
+
+    <!-- =========================================
+         LANDING PAGE (STEP 0)
+         ========================================= -->
+    <div id="landingPage">
+        
+        <!-- PLACE YOUR LOGO FILE NAME IN THE SRC BELOW -->
+        <img src="nt logo.png" alt="NexTech Business Solutions" class="brand-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='block';">
+        
+        <!-- SMART FALLBACK: If logo file is missing, this text representation appears -->
+        <div id="fallback-logo" class="fallback-logo" style="display: none;">
+            NexTech
+            <span>Business Solutions</span>
         </div>
-        <div>
-            <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[DEV] Auto-Fill Data</button>
+
+        <h1 class="landing-title">Commercial Funding <span>Application</span></h1>
+        <p class="landing-subtitle">A streamlined, secure process to get your business the capital it needs to grow. Fast and fully encrypted.</p>
+        
+        <!-- Checklist UX Feature -->
+        <div class="prep-box">
+            <h3>What you'll need:</h3>
+            <ul class="prep-list">
+                <li>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    Basic Business Information & Incorporated Date
+                </li>
+                <li>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    Current & Projected Annual Revenue
+                </li>
+                <li>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    Guarantor Details (Est. FICO & Ownership %)
+                </li>
+            </ul>
         </div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
+
+        <div class="trust-badges">
+            <div class="trust-badge">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                256-bit Secure Transport
+            </div>
+            <div class="trust-badge">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Takes ~3 Minutes
+            </div>
+        </div>
+
+        <button class="btn-start" onclick="startApplication()">
+            Start Application
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+        <div class="privacy-microcopy">
+            By proceeding, you acknowledge that your information will be transmitted securely for business review purposes.
         </div>
     </div>
 
-    <form id="modernForm" onsubmit="submitForm(event)" novalidate>
-        <div class="form-content">
-
-            <!-- STEP 1: Business Profile -->
-            <div class="form-step active" id="step1">
-                <p class="step-description">Please fill out the basic details of your business. All fields are required.</p>
-                <div class="form-grid">
-                    <div class="input-group full-width">
-                        <label for="name">Legal Business Name & DBA<span class="req-star">*</span></label>
-                        <input type="text" id="name" name="name" placeholder="Company Inc. (DBA: Great Products)" autocomplete="organization" required>
-                        <div class="error-message">This field is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cEmailAddress">Business Email<span class="req-star">*</span></label>
-                        <input type="email" id="cEmailAddress" name="cEmailAddress" placeholder="contact@company.com" autocomplete="email" inputmode="email" required>
-                        <div class="error-message">Valid email is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cPhoneNumber">Business Phone<span class="req-star">*</span></label>
-                        <div class="phone-input">
-                            <select id="cPhoneType" name="cPhoneType" required>
-                                <option value="Work">Work</option>
-                                <option value="Mobile">Mobile</option>
-                                <option value="Home">Home</option>
-                                <option value="Fax">Fax</option>
-                            </select>
-                            <input type="tel" id="cPhoneNumber" name="cPhoneNumber" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required>
-                        </div>
-                        <div class="error-message">Phone number is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cIncorporatedDate">Incorporation Date<span class="req-star">*</span></label>
-                        <input type="date" id="cIncorporatedDate" name="cIncorporatedDate" required>
-                        <div class="error-message">Date is required</div>
-                    </div>
-                    <label class="toggle-container full-width">
-                        <span>Operating out of a commercial space?</span>
-                        <input type="checkbox" id="cCommercialSpace" name="cCommercialSpace">
-                        <div class="toggle-switch"></div>
-                    </label>
-                    <div class="input-group full-width">
-                        <label for="cDescription">Business Description<span class="req-star">*</span></label>
-                        <textarea id="cDescription" name="cDescription" rows="3" placeholder="Briefly describe what your business does..." required></textarea>
-                        <div class="error-message">Description is required</div>
-                    </div>
-                    <div class="input-group full-width">
-                        <label for="cDocumentLink">Supporting Documentation Link<span class="req-star">*</span></label>
-                        <input type="url" id="cDocumentLink" name="cDocumentLink" placeholder="https://drive.google.com/..." inputmode="url" required>
-                        <div class="error-message">Valid URL is required</div>
-                    </div>
-                </div>
+    <!-- =========================================
+         MAIN SECURE FORM
+         ========================================= -->
+    <div id="formWrapper">
+        <div class="app-header">
+            <div class="header-top-row">
+                <h2>Secure Application</h2>
+                <span class="step-counter" id="stepCounter">Step 1 of 4</span>
             </div>
-
-            <!-- STEP 2: Address & Financials -->
-            <div class="form-step" id="step2">
-                <p class="step-description">Where are you located, and what do your financials look like?</p>
-                <div class="form-grid">
-                    <div class="sub-header">Registered Address</div>
-                    <div class="input-group full-width">
-                        <label for="cAddressStreet">Street Address<span class="req-star">*</span></label>
-                        <input type="text" id="cAddressStreet" name="cAddressStreet" placeholder="123 Corporate Blvd, Suite 200" autocomplete="street-address" required>
-                        <div class="error-message">Street address is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cAddressCity">City<span class="req-star">*</span></label>
-                        <input type="text" id="cAddressCity" name="cAddressCity" autocomplete="address-level2" required>
-                        <div class="error-message">City is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cAddressState">State / Province<span class="req-star">*</span></label>
-                        <input type="text" id="cAddressState" name="cAddressState" autocomplete="address-level1" required>
-                        <div class="error-message">State is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cAddressPostalCode">Postal / Zip Code<span class="req-star">*</span></label>
-                        <input type="text" id="cAddressPostalCode" name="cAddressPostalCode" autocomplete="postal-code" inputmode="text" required>
-                        <div class="error-message">Postal code is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cAddressCountry">Country<span class="req-star">*</span></label>
-                        <input type="text" id="cAddressCountry" name="cAddressCountry" autocomplete="country-name" required>
-                        <div class="error-message">Country is required</div>
-                    </div>
-
-                    <div class="sub-header">Financial Snapshot</div>
-                    <div class="input-group full-width">
-                        <label>Requested Opportunity Amount<span class="req-star">*</span></label>
-                        <div class="currency-input">
-                            <span class="currency-prefix">USD</span>
-                            <input type="number" id="cOpportunityAmount" name="cOpportunityAmount" step="0.01" placeholder="0.00" inputmode="decimal" required>
-                        </div>
-                        <div class="error-message">Amount is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label>Current Annual Revenue<span class="req-star">*</span></label>
-                        <div class="currency-input">
-                            <span class="currency-prefix">USD</span>
-                            <input type="number" id="cAnnualRevenue" name="cAnnualRevenue" step="0.01" placeholder="0.00" inputmode="decimal" required>
-                        </div>
-                        <div class="error-message">Amount is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label>Projected 2025 Revenue<span class="req-star">*</span></label>
-                        <div class="currency-input">
-                            <span class="currency-prefix">USD</span>
-                            <input type="number" id="cAnnualRevenue2025" name="cAnnualRevenue2025" step="0.01" placeholder="0.00" inputmode="decimal" required>
-                        </div>
-                        <div class="error-message">Amount is required</div>
-                    </div>
-                </div>
+            <div>
+                <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[DEV] Auto-Fill Data</button>
             </div>
-
-            <!-- STEP 3: Primary Guarantor -->
-            <div class="form-step" id="step3">
-                <p class="step-description">Personal details for the primary stakeholder of the business.</p>
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label for="cSalutationName">Title<span class="req-star">*</span></label>
-                        <select id="cSalutationName" name="cSalutationName" autocomplete="honorific-prefix" required>
-                            <option value="">Select</option>
-                            <option value="Mr.">Mr.</option>
-                            <option value="Ms.">Ms.</option>
-                            <option value="Mrs.">Mrs.</option>
-                            <option value="Dr.">Dr.</option>
-                        </select>
-                        <div class="error-message">Title is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cFirstName">First Name<span class="req-star">*</span></label>
-                        <input type="text" id="cFirstName" name="cFirstName" autocomplete="given-name" required>
-                        <div class="error-message">First name is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cMiddleName">Middle Name</label>
-                        <input type="text" id="cMiddleName" name="cMiddleName" autocomplete="additional-name">
-                    </div>
-                    <div class="input-group">
-                        <label for="cLastName">Last Name<span class="req-star">*</span></label>
-                        <input type="text" id="cLastName" name="cLastName" autocomplete="family-name" required>
-                        <div class="error-message">Last name is required</div>
-                    </div>
-                    <div class="input-group full-width">
-                        <label for="cOwnerEmail">Personal Email<span class="req-star">*</span></label>
-                        <input type="email" id="cOwnerEmail" name="cOwnerEmail" autocomplete="email" inputmode="email" required>
-                        <div class="error-message">Valid email is required</div>
-                    </div>
-                    <div class="input-group full-width">
-                        <label for="cOwnerPhoneNumber">Direct Phone<span class="req-star">*</span></label>
-                        <div class="phone-input">
-                            <select id="cOwnerPhoneType" name="cOwnerPhoneType" required>
-                                <option value="Mobile">Mobile</option>
-                                <option value="Work">Work</option>
-                                <option value="Home">Home</option>
-                            </select>
-                            <input type="tel" id="cOwnerPhoneNumber" name="cOwnerPhoneNumber" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required>
-                        </div>
-                        <div class="error-message">Phone number is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cFICO">Est. FICO Score<span class="req-star">*</span></label>
-                        <input type="number" id="cFICO" name="cFICO" min="300" max="850" placeholder="720" inputmode="numeric" required>
-                        <div class="error-message">FICO score is required</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="cOwnershipPercentage">Ownership Percentage (%)<span class="req-star">*</span></label>
-                        <input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal" required>
-                        <div class="error-message">Percentage is required</div>
-                    </div>
-                    <label class="toggle-container full-width">
-                        <span>I currently own my home</span>
-                        <input type="checkbox" id="cDoYouOwnYourHome" name="cDoYouOwnYourHome">
-                        <div class="toggle-switch"></div>
-                    </label>
-                </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
             </div>
+        </div>
 
-            <!-- STEP 4: Additional Owners -->
-            <div class="form-step" id="step4">
-                <p class="step-description">Do you have secondary partners? Add them below, or <strong>skip and submit</strong> if you are the only owner.</p>
-                
-                <!-- Owner 2 CARD -->
-                <div id="owner2-section" class="owner-card" style="display: none;">
-                    <div class="sub-header card-header flex-between">
-                        Secondary Owner
-                        <button type="button" class="btn-remove" onclick="removeOwner(2)">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            Remove
-                        </button>
-                    </div>
+        <form id="modernForm" onsubmit="submitForm(event)" novalidate>
+            <div class="form-content">
+
+                <!-- STEP 1: Business Profile -->
+                <div class="form-step active" id="step1">
+                    <p class="step-description">Please fill out the basic details of your business. All fields are required.</p>
                     <div class="form-grid">
-                        <div class="input-group">
-                            <label>First Name<span class="req-star">*</span></label>
-                            <input type="text" id="cOwner2FirstName" name="cOwner2FirstName">
-                            <div class="error-message">Required</div>
-                        </div>
-                        <div class="input-group">
-                            <label>Last Name<span class="req-star">*</span></label>
-                            <input type="text" id="cOwner2LastName" name="cOwner2LastName">
-                            <div class="error-message">Required</div>
-                        </div>
                         <div class="input-group full-width">
-                            <label>Email<span class="req-star">*</span></label>
-                            <input type="email" id="cOwner2Email" name="cOwner2Email" inputmode="email">
-                            <div class="error-message">Valid email required</div>
+                            <label for="name">Legal Business Name & DBA<span class="req-star">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="Company Inc. (DBA: Great Products)" autocomplete="organization" required>
+                            <div class="error-message">This field is required</div>
                         </div>
-                        <div class="input-group full-width">
-                            <label>Phone<span class="req-star">*</span></label>
+                        <div class="input-group">
+                            <label for="cEmailAddress">Business Email<span class="req-star">*</span></label>
+                            <input type="email" id="cEmailAddress" name="cEmailAddress" placeholder="contact@company.com" autocomplete="email" inputmode="email" required>
+                            <div class="error-message">Valid email is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cPhoneNumber">Business Phone<span class="req-star">*</span></label>
                             <div class="phone-input">
-                                <select id="cOwner2PhoneType" name="cOwner2PhoneType">
-                                    <option value="Mobile">Mobile</option>
+                                <select id="cPhoneType" name="cPhoneType" required>
                                     <option value="Work">Work</option>
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Fax">Fax</option>
                                 </select>
-                                <input type="tel" id="cOwner2PhoneNumber" name="cOwner2PhoneNumber" placeholder="(555) 000-0000" inputmode="tel">
+                                <input type="tel" id="cPhoneNumber" name="cPhoneNumber" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required>
                             </div>
-                            <div class="error-message">Required</div>
+                            <div class="error-message">Phone number is required</div>
                         </div>
                         <div class="input-group">
-                            <label>Est. FICO<span class="req-star">*</span></label>
-                            <input type="number" id="cOwner2FICO" name="cOwner2FICO" inputmode="numeric">
-                            <div class="error-message">Required</div>
-                        </div>
-                        <div class="input-group">
-                            <label>Ownership (%)<span class="req-star">*</span></label>
-                            <input type="number" id="cOwner2OwnershipPercentage" name="cOwner2OwnershipPercentage" step="0.01" inputmode="decimal">
-                            <div class="error-message">Required</div>
+                            <label for="cIncorporatedDate">Incorporation Date<span class="req-star">*</span></label>
+                            <input type="date" id="cIncorporatedDate" name="cIncorporatedDate" required>
+                            <div class="error-message">Date is required</div>
                         </div>
                         <label class="toggle-container full-width">
-                            <span>Homeowner</span>
-                            <input type="checkbox" id="cOwner2OwnHome" name="cOwner2OwnHome">
+                            <span>Operating out of a commercial space?</span>
+                            <input type="checkbox" id="cCommercialSpace" name="cCommercialSpace">
+                            <div class="toggle-switch"></div>
+                        </label>
+                        <div class="input-group full-width">
+                            <label for="cDescription">Business Description<span class="req-star">*</span></label>
+                            <textarea id="cDescription" name="cDescription" rows="3" placeholder="Briefly describe what your business does..." required></textarea>
+                            <div class="error-message">Description is required</div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="cDocumentLink">Supporting Documentation Link<span class="req-star">*</span></label>
+                            <input type="url" id="cDocumentLink" name="cDocumentLink" placeholder="https://drive.google.com/..." inputmode="url" required>
+                            <div class="error-message">Valid URL is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Address & Financials -->
+                <div class="form-step" id="step2">
+                    <p class="step-description">Where are you located, and what do your financials look like?</p>
+                    <div class="form-grid">
+                        <div class="sub-header">Registered Address</div>
+                        <div class="input-group full-width">
+                            <label for="cAddressStreet">Street Address<span class="req-star">*</span></label>
+                            <input type="text" id="cAddressStreet" name="cAddressStreet" placeholder="123 Corporate Blvd, Suite 200" autocomplete="street-address" required>
+                            <div class="error-message">Street address is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cAddressCity">City<span class="req-star">*</span></label>
+                            <input type="text" id="cAddressCity" name="cAddressCity" autocomplete="address-level2" required>
+                            <div class="error-message">City is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cAddressState">State / Province<span class="req-star">*</span></label>
+                            <input type="text" id="cAddressState" name="cAddressState" autocomplete="address-level1" required>
+                            <div class="error-message">State is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cAddressPostalCode">Postal / Zip Code<span class="req-star">*</span></label>
+                            <input type="text" id="cAddressPostalCode" name="cAddressPostalCode" autocomplete="postal-code" inputmode="text" required>
+                            <div class="error-message">Postal code is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cAddressCountry">Country<span class="req-star">*</span></label>
+                            <input type="text" id="cAddressCountry" name="cAddressCountry" autocomplete="country-name" required>
+                            <div class="error-message">Country is required</div>
+                        </div>
+
+                        <div class="sub-header">Financial Snapshot</div>
+                        <div class="input-group full-width">
+                            <label>Requested Opportunity Amount<span class="req-star">*</span></label>
+                            <div class="currency-input">
+                                <span class="currency-prefix">USD</span>
+                                <input type="number" id="cOpportunityAmount" name="cOpportunityAmount" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                            </div>
+                            <div class="error-message">Amount is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Current Annual Revenue<span class="req-star">*</span></label>
+                            <div class="currency-input">
+                                <span class="currency-prefix">USD</span>
+                                <input type="number" id="cAnnualRevenue" name="cAnnualRevenue" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                            </div>
+                            <div class="error-message">Amount is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Projected 2025 Revenue<span class="req-star">*</span></label>
+                            <div class="currency-input">
+                                <span class="currency-prefix">USD</span>
+                                <input type="number" id="cAnnualRevenue2025" name="cAnnualRevenue2025" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                            </div>
+                            <div class="error-message">Amount is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Primary Guarantor -->
+                <div class="form-step" id="step3">
+                    <p class="step-description">Personal details for the primary stakeholder of the business.</p>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="cSalutationName">Title<span class="req-star">*</span></label>
+                            <select id="cSalutationName" name="cSalutationName" autocomplete="honorific-prefix" required>
+                                <option value="">Select</option>
+                                <option value="Mr.">Mr.</option>
+                                <option value="Ms.">Ms.</option>
+                                <option value="Mrs.">Mrs.</option>
+                                <option value="Dr.">Dr.</option>
+                            </select>
+                            <div class="error-message">Title is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cFirstName">First Name<span class="req-star">*</span></label>
+                            <input type="text" id="cFirstName" name="cFirstName" autocomplete="given-name" required>
+                            <div class="error-message">First name is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cMiddleName">Middle Name</label>
+                            <input type="text" id="cMiddleName" name="cMiddleName" autocomplete="additional-name">
+                        </div>
+                        <div class="input-group">
+                            <label for="cLastName">Last Name<span class="req-star">*</span></label>
+                            <input type="text" id="cLastName" name="cLastName" autocomplete="family-name" required>
+                            <div class="error-message">Last name is required</div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="cOwnerEmail">Personal Email<span class="req-star">*</span></label>
+                            <input type="email" id="cOwnerEmail" name="cOwnerEmail" autocomplete="email" inputmode="email" required>
+                            <div class="error-message">Valid email is required</div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="cOwnerPhoneNumber">Direct Phone<span class="req-star">*</span></label>
+                            <div class="phone-input">
+                                <select id="cOwnerPhoneType" name="cOwnerPhoneType" required>
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Home">Home</option>
+                                </select>
+                                <input type="tel" id="cOwnerPhoneNumber" name="cOwnerPhoneNumber" placeholder="(555) 000-0000" autocomplete="tel" inputmode="tel" required>
+                            </div>
+                            <div class="error-message">Phone number is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cFICO">Est. FICO Score<span class="req-star">*</span></label>
+                            <input type="number" id="cFICO" name="cFICO" min="300" max="850" placeholder="720" inputmode="numeric" required>
+                            <div class="error-message">FICO score is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label for="cOwnershipPercentage">Ownership Percentage (%)<span class="req-star">*</span></label>
+                            <input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal" required>
+                            <div class="error-message">Percentage is required</div>
+                        </div>
+                        <label class="toggle-container full-width">
+                            <span>I currently own my home</span>
+                            <input type="checkbox" id="cDoYouOwnYourHome" name="cDoYouOwnYourHome">
                             <div class="toggle-switch"></div>
                         </label>
                     </div>
                 </div>
 
-                <!-- Owner 3 CARD -->
-                <div id="owner3-section" class="owner-card" style="display: none;">
-                    <div class="sub-header card-header flex-between">
-                        Tertiary Owner
-                        <button type="button" class="btn-remove" onclick="removeOwner(3)">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            Remove
-                        </button>
-                    </div>
-                    <div class="form-grid">
-                        <div class="input-group">
-                            <label>First Name<span class="req-star">*</span></label>
-                            <input type="text" id="cOwner3FirstName" name="cOwner3FirstName">
-                            <div class="error-message">Required</div>
+                <!-- STEP 4: Additional Owners -->
+                <div class="form-step" id="step4">
+                    <p class="step-description">Do you have secondary partners? Add them below, or <strong>skip and submit</strong> if you are the only owner.</p>
+                    
+                    <!-- Owner 2 CARD -->
+                    <div id="owner2-section" class="owner-card" style="display: none;">
+                        <div class="sub-header card-header flex-between">
+                            Secondary Owner
+                            <button type="button" class="btn-remove" onclick="removeOwner(2)">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                Remove
+                            </button>
                         </div>
-                        <div class="input-group">
-                            <label>Last Name<span class="req-star">*</span></label>
-                            <input type="text" id="cOwner3LastName" name="cOwner3LastName">
-                            <div class="error-message">Required</div>
-                        </div>
-                        <div class="input-group full-width">
-                            <label>Email<span class="req-star">*</span></label>
-                            <input type="email" id="cOwner3Email" name="cOwner3Email" inputmode="email">
-                            <div class="error-message">Valid email required</div>
-                        </div>
-                        <div class="input-group full-width">
-                            <label>Phone<span class="req-star">*</span></label>
-                            <div class="phone-input">
-                                <select id="cOwner3PhoneType" name="cOwner3PhoneType">
-                                    <option value="Mobile">Mobile</option>
-                                    <option value="Work">Work</option>
-                                </select>
-                                <input type="tel" id="cOwner3PhoneNumber" name="cOwner3PhoneNumber" placeholder="(555) 000-0000" inputmode="tel">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>First Name<span class="req-star">*</span></label>
+                                <input type="text" id="cOwner2FirstName" name="cOwner2FirstName">
+                                <div class="error-message">Required</div>
                             </div>
-                            <div class="error-message">Required</div>
+                            <div class="input-group">
+                                <label>Last Name<span class="req-star">*</span></label>
+                                <input type="text" id="cOwner2LastName" name="cOwner2LastName">
+                                <div class="error-message">Required</div>
+                            </div>
+                            <div class="input-group full-width">
+                                <label>Email<span class="req-star">*</span></label>
+                                <input type="email" id="cOwner2Email" name="cOwner2Email" inputmode="email">
+                                <div class="error-message">Valid email required</div>
+                            </div>
+                            <div class="input-group full-width">
+                                <label>Phone<span class="req-star">*</span></label>
+                                <div class="phone-input">
+                                    <select id="cOwner2PhoneType" name="cOwner2PhoneType">
+                                        <option value="Mobile">Mobile</option>
+                                        <option value="Work">Work</option>
+                                    </select>
+                                    <input type="tel" id="cOwner2PhoneNumber" name="cOwner2PhoneNumber" placeholder="(555) 000-0000" inputmode="tel">
+                                </div>
+                                <div class="error-message">Required</div>
+                            </div>
+                            <div class="input-group">
+                                <label>Est. FICO<span class="req-star">*</span></label>
+                                <input type="number" id="cOwner2FICO" name="cOwner2FICO" inputmode="numeric">
+                                <div class="error-message">Required</div>
+                            </div>
+                            <div class="input-group">
+                                <label>Ownership (%)<span class="req-star">*</span></label>
+                                <input type="number" id="cOwner2OwnershipPercentage" name="cOwner2OwnershipPercentage" step="0.01" inputmode="decimal">
+                                <div class="error-message">Required</div>
+                            </div>
+                            <label class="toggle-container full-width">
+                                <span>Homeowner</span>
+                                <input type="checkbox" id="cOwner2OwnHome" name="cOwner2OwnHome">
+                                <div class="toggle-switch"></div>
+                            </label>
                         </div>
-                        <div class="input-group">
-                            <label>Est. FICO<span class="req-star">*</span></label>
-                            <input type="number" id="cOwner3FICO" name="cOwner3FICO" inputmode="numeric">
-                            <div class="error-message">Required</div>
-                        </div>
-                        <div class="input-group">
-                            <label>Ownership (%)<span class="req-star">*</span></label>
-                            <input type="number" id="cOwner3OwnershipPercentage" name="cOwner3OwnershipPercentage" step="0.01" inputmode="decimal">
-                            <div class="error-message">Required</div>
-                        </div>
-                        <label class="toggle-container full-width">
-                            <span>Homeowner</span>
-                            <input type="checkbox" id="cOwner3OwnHome" name="cOwner3OwnHome">
-                            <div class="toggle-switch"></div>
-                        </label>
                     </div>
+
+                    <!-- Owner 3 CARD -->
+                    <div id="owner3-section" class="owner-card" style="display: none;">
+                        <div class="sub-header card-header flex-between">
+                            Tertiary Owner
+                            <button type="button" class="btn-remove" onclick="removeOwner(3)">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                Remove
+                            </button>
+                        </div>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>First Name<span class="req-star">*</span></label>
+                                <input type="text" id="cOwner3FirstName" name="cOwner3FirstName">
+                                <div class="error-message">Required</div>
+                            </div>
+                            <div class="input-group">
+                                <label>Last Name<span class="req-star">*</span></label>
+                                <input type="text" id="cOwner3LastName" name="cOwner3LastName">
+                                <div class="error-message">Required</div>
+                            </div>
+                            <div class="input-group full-width">
+                                <label>Email<span class="req-star">*</span></label>
+                                <input type="email" id="cOwner3Email" name="cOwner3Email" inputmode="email">
+                                <div class="error-message">Valid email required</div>
+                            </div>
+                            <div class="input-group full-width">
+                                <label>Phone<span class="req-star">*</span></label>
+                                <div class="phone-input">
+                                    <select id="cOwner3PhoneType" name="cOwner3PhoneType">
+                                        <option value="Mobile">Mobile</option>
+                                        <option value="Work">Work</option>
+                                    </select>
+                                    <input type="tel" id="cOwner3PhoneNumber" name="cOwner3PhoneNumber" placeholder="(555) 000-0000" inputmode="tel">
+                                </div>
+                                <div class="error-message">Required</div>
+                            </div>
+                            <div class="input-group">
+                                <label>Est. FICO<span class="req-star">*</span></label>
+                                <input type="number" id="cOwner3FICO" name="cOwner3FICO" inputmode="numeric">
+                                <div class="error-message">Required</div>
+                            </div>
+                            <div class="input-group">
+                                <label>Ownership (%)<span class="req-star">*</span></label>
+                                <input type="number" id="cOwner3OwnershipPercentage" name="cOwner3OwnershipPercentage" step="0.01" inputmode="decimal">
+                                <div class="error-message">Required</div>
+                            </div>
+                            <label class="toggle-container full-width">
+                                <span>Homeowner</span>
+                                <input type="checkbox" id="cOwner3OwnHome" name="cOwner3OwnHome">
+                                <div class="toggle-switch"></div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="button" id="btnAddOwner" class="btn-outline" onclick="addOwner()">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        Add Additional Owner
+                    </button>
                 </div>
 
-                <button type="button" id="btnAddOwner" class="btn-outline" onclick="addOwner()">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                    Add Additional Owner
-                </button>
             </div>
 
-        </div>
-
-        <div class="form-footer">
-            <button type="button" class="nav-btn btn-prev" id="btnPrev" onclick="changeStep(-1)">Back</button>
-            <button type="button" class="nav-btn btn-next" id="btnNext" onclick="changeStep(1)">Continue</button>
-            <button type="submit" class="nav-btn btn-submit" id="btnSubmit">Submit Application</button>
-        </div>
-    </form>
+            <div class="form-footer">
+                <button type="button" class="nav-btn btn-prev" id="btnPrev" onclick="changeStep(-1)">Back</button>
+                <button type="button" class="nav-btn btn-next" id="btnNext" onclick="changeStep(1)">Continue</button>
+                <button type="submit" class="nav-btn btn-submit" id="btnSubmit">Submit Application</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>
+    // =======================================================
+    // START APPLICATION FROM LANDING PAGE
+    // =======================================================
+    function startApplication() {
+        document.getElementById('landingPage').style.display = 'none';
+        
+        const formWrap = document.getElementById('formWrapper');
+        formWrap.style.display = 'block';
+        
+        // Slight delay to trigger CSS fade-in smoothly
+        setTimeout(() => {
+            formWrap.style.opacity = '1';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 10);
+    }
+
+    // =======================================================
+    // TEMPORARY AUTOFILL FUNCTION FOR TESTING - REMOVE LATER
+    // =======================================================
     function autofillTestData() {
+        // Step 1
         document.getElementById('name').value = "Acme Corp";
         document.getElementById('cEmailAddress').value = "test@acmecorp.com";
         document.getElementById('cPhoneType').value = "Work"; 
@@ -755,15 +1003,19 @@
         document.getElementById('cCommercialSpace').checked = true;
         document.getElementById('cDescription').value = "Testing webhook payload.";
         document.getElementById('cDocumentLink').value = "https://google.com";
+
+        // Step 2
         document.getElementById('cAddressStreet').value = "123 Main St";
         document.getElementById('cAddressCity').value = "New York";
         document.getElementById('cAddressState').value = "NY";
         document.getElementById('cAddressPostalCode').value = "10001";
         document.getElementById('cAddressCountry').value = "USA";
+        
         document.getElementById('cOpportunityAmount').value = "10000";
         document.getElementById('cAnnualRevenue').value = "50000";
         document.getElementById('cAnnualRevenue2025').value = "60000";
-        
+
+        // Step 3
         document.getElementById('cSalutationName').value = "Mr.";
         document.getElementById('cFirstName').value = "John";
         document.getElementById('cLastName').value = "Doe";
@@ -774,6 +1026,7 @@
         document.getElementById('cOwnershipPercentage').value = "100";
         document.getElementById('cDoYouOwnYourHome').checked = true;
 
+        // Step 4 
         addOwner(); 
         document.getElementById('cOwner2FirstName').value = "Jane";
         document.getElementById('cOwner2LastName').value = "Smith";
@@ -805,13 +1058,7 @@
     const btnNext = document.getElementById('btnNext');
     const btnPrev = document.getElementById('btnPrev');
     const btnSubmit = document.getElementById('btnSubmit');
-    const progressFill = document.getElementById('progressFill');
-    const stepCounter = document.getElementById('stepCounter');
 
-    let owner2Visible = false;
-    let owner3Visible = false;
-
-    // Remove red borders as user types
     document.querySelectorAll('input, select, textarea').forEach(element => {
         element.addEventListener('input', function() {
             if (this.value.trim() !== '') {
@@ -849,24 +1096,6 @@
         }
     }
 
-    function hideAndClearOwner(num) {
-        const sec = document.getElementById(`owner${num}-section`);
-        sec.style.display = 'none';
-        setInputsRequired(sec, false);
-        
-        if (num === 2) owner2Visible = false;
-        if (num === 3) owner3Visible = false;
-        
-        sec.querySelectorAll('input').forEach(input => {
-            if (input.type === 'checkbox') input.checked = false;
-            else input.value = '';
-        });
-        
-        sec.querySelectorAll('select').forEach(select => {
-            select.value = "Mobile";
-        });
-    }
-
     function removeOwner(num) {
         if (num === 2) {
             if (owner3Visible) {
@@ -879,12 +1108,22 @@
                 document.getElementById('cOwner2FICO').value = document.getElementById('cOwner3FICO').value;
                 document.getElementById('cOwner2OwnershipPercentage').value = document.getElementById('cOwner3OwnershipPercentage').value;
                 document.getElementById('cOwner2OwnHome').checked = document.getElementById('cOwner3OwnHome').checked;
-                hideAndClearOwner(3);
+                
+                const sec3 = document.getElementById('owner3-section');
+                sec3.style.display = 'none';
+                setInputsRequired(sec3, false);
+                owner3Visible = false;
             } else {
-                hideAndClearOwner(2);
+                const sec2 = document.getElementById('owner2-section');
+                sec2.style.display = 'none';
+                setInputsRequired(sec2, false);
+                owner2Visible = false;
             }
         } else if (num === 3) {
-            hideAndClearOwner(3);
+            const sec3 = document.getElementById('owner3-section');
+            sec3.style.display = 'none';
+            setInputsRequired(sec3, false);
+            owner3Visible = false;
         }
         document.getElementById('btnAddOwner').style.display = 'flex';
     }
@@ -910,7 +1149,6 @@
             }
         });
         
-        // Smart scroll to the error
         if (firstInvalid) {
             firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -947,7 +1185,6 @@
             if (!validateCurrentStep()) return; 
         }
         
-        // Blur inputs to hide mobile keyboard during transition
         document.activeElement.blur();
         
         currentStep += direction;
@@ -955,8 +1192,6 @@
         if (currentStep >= steps.length) currentStep = steps.length - 1;
         
         updateUI();
-        
-        // Ensure smooth scroll top
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -981,7 +1216,7 @@
             const num = formData.get(numParam) || "";
             if (!num) return[];
             const type = formData.get(typeParam) || "Mobile";
-            return [{"phoneNumber": num, "type": type}];
+            return[{"phoneNumber": num, "type": type}];
         };
 
         const payload = {
@@ -1019,7 +1254,6 @@
             "cDoYouOwnYourHome": document.getElementById("cDoYouOwnYourHome").checked,
             "cDocumentLink": formData.get("cDocumentLink"),
             
-            // EXACT MAPPING for Owner 2 & 3 (Ensuring real values are sent, not 0/false)
             "cOwner2FirstName": formData.get("cOwner2FirstName") || "",
             "cOwner2LastName": formData.get("cOwner2LastName") || "",
             "cOwner2PhoneNumber": getPhoneArray("cOwner2PhoneNumber", "cOwner2PhoneType"),
@@ -1045,7 +1279,7 @@
         .then(response => {
             if(response.ok) {
                 document.getElementById('mainContainer').innerHTML = `
-                    <div style="padding: 60px 20px; text-align: center; background: #ffffff;">
+                    <div style="padding: 60px 20px; text-align: center; background: #ffffff; min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                         <svg style="color: #10b981; width: 72px; height: 72px; margin: 0 auto 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
