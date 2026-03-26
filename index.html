@@ -159,9 +159,15 @@
         .error-message { color: var(--error); font-size: 0.75rem; font-weight: 600; margin-top: 2px; display: none; padding-left: 2px; }
         .error-border ~ .error-message { display: block; }
 
-        .currency-input, .phone-input { display: flex; align-items: stretch; width: 100%; border-radius: var(--radius-md); box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset; }
-        .currency-prefix { background-color: #f1f5f9; color: #475569; padding: 0 16px; border: 1px solid var(--border); border-right: none; border-radius: var(--radius-md) 0 0 var(--radius-md); font-weight: 600; font-size: 16px; display: flex; align-items: center; }
+        /* Combined Addons (Currency, Phone, Percentage) */
+        .currency-input, .phone-input, .percentage-input { display: flex; align-items: stretch; width: 100%; border-radius: var(--radius-md); box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset; }
+        
+        .currency-prefix { background-color: #f1f5f9; color: #475569; padding: 0 16px; border: 1px solid var(--border); border-right: none; border-radius: var(--radius-md) 0 0 var(--radius-md); font-weight: 600; font-size: 16px; display: flex; align-items: center; justify-content: center; flex: 0 0 70px; }
+        .percentage-suffix { background-color: #f1f5f9; color: #475569; padding: 0 16px; border: 1px solid var(--border); border-left: none; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-weight: 600; font-size: 16px; display: flex; align-items: center; justify-content: center; flex: 0 0 50px; }
+        
         .currency-input input, .phone-input input { border-radius: 0 var(--radius-md) var(--radius-md) 0; flex: 1; box-shadow: none; }
+        .percentage-input input { border-radius: var(--radius-md) 0 0 var(--radius-md); flex: 1; box-shadow: none; border-right: none; }
+        
         .phone-input select { flex: 0 0 110px; border-radius: var(--radius-md) 0 0 var(--radius-md); border-right: none; background-color: #f1f5f9; box-shadow: none; }
 
         .toggle-container { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-md); cursor: pointer; min-height: 52px; margin-top: 5px; }
@@ -410,24 +416,9 @@
                     <p class="step-description">Personal details for the primary stakeholder of the business.</p>
                     <div class="form-grid">
                         <div class="input-group">
-                            <label for="cSalutationName">Title<span class="req-star">*</span></label>
-                            <select id="cSalutationName" name="cSalutationName" autocomplete="honorific-prefix" required>
-                                <option value="">Select</option>
-                                <option value="Mr.">Mr.</option>
-                                <option value="Ms.">Ms.</option>
-                                <option value="Mrs.">Mrs.</option>
-                                <option value="Dr.">Dr.</option>
-                            </select>
-                            <div class="error-message">Title is required</div>
-                        </div>
-                        <div class="input-group">
                             <label for="cFirstName">First Name<span class="req-star">*</span></label>
                             <input type="text" id="cFirstName" name="cFirstName" autocomplete="given-name" required>
                             <div class="error-message">First name is required</div>
-                        </div>
-                        <div class="input-group">
-                            <label for="cMiddleName">Middle Name</label>
-                            <input type="text" id="cMiddleName" name="cMiddleName" autocomplete="additional-name">
                         </div>
                         <div class="input-group">
                             <label for="cLastName">Last Name<span class="req-star">*</span></label>
@@ -457,8 +448,11 @@
                             <div class="error-message">FICO score is required</div>
                         </div>
                         <div class="input-group">
-                            <label for="cOwnershipPercentage">Ownership Percentage (%)<span class="req-star">*</span></label>
-                            <input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal" required>
+                            <label for="cOwnershipPercentage">Ownership<span class="req-star">*</span></label>
+                            <div class="percentage-input">
+                                <input type="number" id="cOwnershipPercentage" name="cOwnershipPercentage" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal" required>
+                                <span class="percentage-suffix">%</span>
+                            </div>
                             <div class="error-message">Percentage is required</div>
                         </div>
                         <label class="toggle-container full-width">
@@ -518,8 +512,11 @@
                                 <div class="error-message">Required</div>
                             </div>
                             <div class="input-group">
-                                <label>Ownership (%)<span class="req-star">*</span></label>
-                                <input type="number" id="cOwner2OwnershipPercentage" name="cOwner2OwnershipPercentage" step="0.01" inputmode="decimal">
+                                <label>Ownership<span class="req-star">*</span></label>
+                                <div class="percentage-input">
+                                    <input type="number" id="cOwner2OwnershipPercentage" name="cOwner2OwnershipPercentage" step="0.01" inputmode="decimal">
+                                    <span class="percentage-suffix">%</span>
+                                </div>
                                 <div class="error-message">Required</div>
                             </div>
                             <label class="toggle-container full-width">
@@ -572,8 +569,11 @@
                                 <div class="error-message">Required</div>
                             </div>
                             <div class="input-group">
-                                <label>Ownership (%)<span class="req-star">*</span></label>
-                                <input type="number" id="cOwner3OwnershipPercentage" name="cOwner3OwnershipPercentage" step="0.01" inputmode="decimal">
+                                <label>Ownership<span class="req-star">*</span></label>
+                                <div class="percentage-input">
+                                    <input type="number" id="cOwner3OwnershipPercentage" name="cOwner3OwnershipPercentage" step="0.01" inputmode="decimal">
+                                    <span class="percentage-suffix">%</span>
+                                </div>
                                 <div class="error-message">Required</div>
                             </div>
                             <label class="toggle-container full-width">
@@ -651,8 +651,7 @@
         document.getElementById('cPriorYear1').value = "1500000";
         document.getElementById('cPriorYear2').value = "1100000";
 
-        // Step 3 (Allocated exactly 100% across the 3 owners for easy testing)
-        document.getElementById('cSalutationName').value = "Mr.";
+        // Step 3 
         document.getElementById('cFirstName').value = "John";
         document.getElementById('cLastName').value = "Doe";
         document.getElementById('cOwnerEmail').value = "john@doe.com";
@@ -974,7 +973,7 @@
             "cAddressMap": "", 
             "cCommercialSpace": document.getElementById("cCommercialSpace").checked,
             "cDescription": formData.get("cDescription"), 
-            "cSalutationName": formData.get("cSalutationName"),
+            "cSalutationName": formData.get("cSalutationName") || "",
             "cFirstName": formData.get("cFirstName"),
             "cLastName": formData.get("cLastName"),
             "cMiddleName": formData.get("cMiddleName") || "",
