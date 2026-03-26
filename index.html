@@ -35,7 +35,6 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            /* Adds a subtle, premium ambient background pattern */
             background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
             background-size: 20px 20px;
             color: var(--text-primary);
@@ -53,14 +52,14 @@
             background: var(--surface);
             border-radius: var(--radius-lg);
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255, 255, 255, 0.5); /* Glass edge effect */
+            border: 1px solid rgba(255, 255, 255, 0.5);
             position: relative;
             overflow: hidden;
             align-self: flex-start;
         }
 
         /* =========================================
-           MODERN LANDING PAGE STYLES
+           LANDING PAGE STYLES
            ========================================= */
         #landingPage {
             padding: 60px 40px;
@@ -73,56 +72,13 @@
             animation: fadeIn 0.5s ease-out forwards;
         }
 
-        .brand-logo {
-            max-width: 240px;
-            width: 100%;
-            height: auto;
-            margin-bottom: 30px;
-        }
+        .brand-logo { max-width: 240px; width: 100%; height: auto; margin-bottom: 30px; }
+        .fallback-logo { font-size: 3rem; font-weight: 600; letter-spacing: -1px; color: #000; margin-bottom: 30px; line-height: 1; }
+        .fallback-logo span { display: block; font-size: 1rem; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; color: var(--text-secondary); }
+        .landing-title { font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 15px; letter-spacing: -0.5px; line-height: 1.2; }
+        .landing-title span { background: linear-gradient(135deg, #000000 0%, #475569 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .landing-subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 35px; max-width: 480px; line-height: 1.6; }
 
-        .fallback-logo {
-            font-size: 3rem;
-            font-weight: 600;
-            letter-spacing: -1px;
-            color: #000;
-            margin-bottom: 30px;
-            line-height: 1;
-        }
-        .fallback-logo span {
-            display: block;
-            font-size: 1rem;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 8px;
-            color: var(--text-secondary);
-        }
-
-        .landing-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-
-        /* Premium gradient text effect */
-        .landing-title span {
-            background: linear-gradient(135deg, #000000 0%, #475569 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .landing-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 35px;
-            max-width: 480px;
-            line-height: 1.6;
-        }
-
-        /* Preparation Checklist - Great UX addition */
         .prep-box {
             background-color: var(--input-bg);
             border: 1px solid var(--border);
@@ -134,420 +90,128 @@
             margin-bottom: 35px;
             box-shadow: 0 4px 6px -4px rgba(0,0,0,0.05);
         }
+        .prep-box h3 { margin: 0 0 15px 0; font-size: 0.95rem; color: var(--text-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .prep-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .prep-list li { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; color: var(--text-secondary); }
+        .prep-list li svg { color: var(--success); flex-shrink: 0; }
 
-        .prep-box h3 {
-            margin: 0 0 15px 0;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .prep-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .prep-list li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        .prep-list li svg {
-            color: var(--success);
-            flex-shrink: 0;
-        }
-
-        .trust-badges {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 500px;
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-        .trust-badge svg {
-            color: #94a3b8;
-        }
+        .trust-badges { display: flex; gap: 15px; margin-bottom: 40px; justify-content: center; flex-wrap: wrap; max-width: 500px; }
+        .trust-badge { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+        .trust-badge svg { color: #94a3b8; }
 
         .btn-start {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 1.15rem;
-            font-weight: 600;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 320px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+            background-color: var(--primary); color: white; border: none; padding: 18px 40px; font-size: 1.15rem;
+            font-weight: 600; border-radius: 30px; cursor: pointer; transition: var(--transition);
+            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5); width: 100%; max-width: 320px; display: flex;
+            align-items: center; justify-content: center; gap: 12px;
         }
-
-        /* Micro-interaction for the arrow */
-        .btn-start svg {
-            transition: transform 0.3s ease;
-        }
-        .btn-start:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.4);
-            background-color: var(--primary-hover);
-        }
-        .btn-start:hover svg {
-            transform: translateX(5px);
-        }
-        .btn-start:active {
-            transform: scale(0.98);
-        }
-
-        .privacy-microcopy {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin-top: 20px;
-            max-width: 300px;
-        }
+        .btn-start svg { transition: transform 0.3s ease; }
+        .btn-start:hover { transform: translateY(-2px); box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.4); background-color: var(--primary-hover); }
+        .btn-start:hover svg { transform: translateX(5px); }
+        .btn-start:active { transform: scale(0.98); }
+        .privacy-microcopy { font-size: 0.75rem; color: #94a3b8; margin-top: 20px; max-width: 300px; }
 
         /* =========================================
            FORM STYLES
            ========================================= */
-        #formWrapper {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-        }
+        #formWrapper { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
 
-        .app-header {
-            padding: 30px 35px 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .header-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
+        .app-header { padding: 30px 35px 20px; border-bottom: 1px solid var(--border); }
+        .header-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .form-header-logo { max-width: 130px; height: auto; }
+        .form-header-title { font-size: 1.25rem; font-weight: 600; margin: 12px 0 0 0; color: #0f172a; }
+        .step-counter { background: #f1f5f9; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); border: 1px solid #e2e8f0; }
 
-        .header-top-row h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 0;
-            color: #0f172a;
-        }
+        .progress-bar { height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; width: 100%; margin-top: 20px; }
+        .progress-fill { height: 100%; background: var(--primary); border-radius: 10px; transition: width 0.5s ease-in-out; }
 
-        .step-counter {
-            background: #f1f5f9;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            border: 1px solid #e2e8f0;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            border-radius: 10px;
-            transition: width 0.5s ease-in-out;
-        }
-
-        .form-content {
-            padding: 30px 35px;
-        }
-
+        .form-content { padding: 30px 35px; }
         .form-step { display: none; }
-        .form-step.active {
-            display: block;
-            animation: slideFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .form-step.active { display: block; animation: slideFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        @keyframes slideFadeIn {
-            from { opacity: 0; transform: translateX(15px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes slideFadeIn { from { opacity: 0; transform: translateX(15px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .step-description {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-        }
+        .step-description { color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem; }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            width: 100%;
-        }
-
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
         .full-width { grid-column: 1 / -1; }
+        .input-group { display: flex; flex-direction: column; gap: 6px; width: 100%; min-width: 0; }
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 100%;
-            min-width: 0;
-        }
-
-        label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #334155;
-            padding-left: 2px;
-        }
-
+        label { font-size: 0.85rem; font-weight: 600; color: #334155; padding-left: 2px; }
         .req-star { color: var(--error); margin-left: 3px; }
 
         input[type="text"], input[type="email"], input[type="number"], 
         input[type="tel"], input[type="date"], input[type="url"], select, textarea {
-            width: 100%;
-            min-height: 52px;
-            padding: 14px 16px;
-            background-color: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 16px !important; 
-            transition: var(--transition);
-            -webkit-appearance: none;
-            appearance: none;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset;
+            width: 100%; min-height: 52px; padding: 14px 16px; background-color: var(--input-bg);
+            border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary);
+            font-family: inherit; font-size: 16px !important; transition: var(--transition);
+            -webkit-appearance: none; appearance: none; box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset;
         }
 
         select {
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 16px;
-            padding-right: 40px;
+            background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 40px;
         }
 
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: #fff;
-            box-shadow: 0 0 0 4px var(--primary-ring);
-        }
-
-        .error-border {
-            border-color: var(--error) !important;
-            box-shadow: 0 0 0 4px var(--error-ring) !important;
-        }
-        
-        .error-message {
-            color: var(--error);
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-top: 2px;
-            display: none;
-            padding-left: 2px;
-        }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); background-color: #fff; box-shadow: 0 0 0 4px var(--primary-ring); }
+        .error-border { border-color: var(--error) !important; box-shadow: 0 0 0 4px var(--error-ring) !important; }
+        .error-message { color: var(--error); font-size: 0.75rem; font-weight: 600; margin-top: 2px; display: none; padding-left: 2px; }
         .error-border ~ .error-message { display: block; }
 
-        .currency-input, .phone-input {
-            display: flex;
-            align-items: stretch;
-            width: 100%;
-            border-radius: var(--radius-md);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset;
-        }
+        .currency-input, .phone-input { display: flex; align-items: stretch; width: 100%; border-radius: var(--radius-md); box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset; }
+        .currency-prefix { background-color: #f1f5f9; color: #475569; padding: 0 16px; border: 1px solid var(--border); border-right: none; border-radius: var(--radius-md) 0 0 var(--radius-md); font-weight: 600; font-size: 16px; display: flex; align-items: center; }
+        .currency-input input, .phone-input input { border-radius: 0 var(--radius-md) var(--radius-md) 0; flex: 1; box-shadow: none; }
+        .phone-input select { flex: 0 0 110px; border-radius: var(--radius-md) 0 0 var(--radius-md); border-right: none; background-color: #f1f5f9; box-shadow: none; }
 
-        .currency-prefix {
-            background-color: #f1f5f9;
-            color: #475569;
-            padding: 0 16px;
-            border: 1px solid var(--border);
-            border-right: none;
-            border-radius: var(--radius-md) 0 0 var(--radius-md);
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-        }
-
-        .currency-input input, .phone-input input {
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            flex: 1;
-            box-shadow: none;
-        }
-
-        .phone-input select {
-            flex: 0 0 110px;
-            border-radius: var(--radius-md) 0 0 var(--radius-md);
-            border-right: none;
-            background-color: #f1f5f9;
-            box-shadow: none;
-        }
-
-        .toggle-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 18px;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            min-height: 52px;
-            margin-top: 5px;
-        }
+        .toggle-container { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-md); cursor: pointer; min-height: 52px; margin-top: 5px; }
         .toggle-container span { font-weight: 500; font-size: 0.95rem; }
         .toggle-container input { display: none; }
-        .toggle-switch {
-            position: relative;
-            width: 48px;
-            height: 26px;
-            background-color: #cbd5e1;
-            border-radius: 30px;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background-color: white;
-            border-radius: 50%;
-            transition: var(--transition);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
+        .toggle-switch { position: relative; width: 48px; height: 26px; background-color: #cbd5e1; border-radius: 30px; transition: var(--transition); flex-shrink: 0; }
+        .toggle-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; background-color: white; border-radius: 50%; transition: var(--transition); box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .toggle-container input:checked + .toggle-switch { background-color: var(--success); }
         .toggle-container input:checked + .toggle-switch::after { transform: translateX(22px); }
 
-        .owner-card {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 22px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .sub-header {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-top: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f1f5f9;
-            color: #0f172a;
-        }
-        .card-header {
-            margin-top: 0;
-            border-bottom: none;
-            margin-bottom: 15px;
-        }
+        .owner-card { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 22px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .sub-header { font-size: 1.1rem; font-weight: 600; margin-top: 15px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; color: #0f172a; }
+        .card-header { margin-top: 0; border-bottom: none; margin-bottom: 15px; }
 
-        .btn-outline {
-            background-color: transparent;
-            color: var(--primary);
-            border: 2px dashed var(--border);
-            padding: 14px 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-        }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 2px dashed var(--border); padding: 14px 24px; font-size: 1rem; font-weight: 600; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; }
         .btn-outline:hover { background-color: #f8fafc; border-color: var(--primary); }
-
-        .btn-remove {
-            background-color: transparent;
-            color: var(--error);
-            border: none;
-            padding: 6px 12px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+        .btn-remove { background-color: transparent; color: var(--error); border: none; padding: 6px 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 4px; }
         .btn-remove:hover { background-color: #fef2f2; }
 
-        .form-footer {
-            padding: 20px 35px 30px;
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            border-top: 1px solid var(--border);
-            background: var(--surface);
-        }
-
-        button.nav-btn {
-            padding: 16px 24px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            min-height: 54px;
-        }
-
+        .form-footer { padding: 20px 35px 30px; display: flex; justify-content: space-between; gap: 15px; border-top: 1px solid var(--border); background: var(--surface); }
+        button.nav-btn { padding: 16px 24px; font-size: 1.05rem; font-weight: 600; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); border: none; min-height: 54px; }
         .btn-prev { background: #f1f5f9; color: var(--text-secondary); display: none; width: 30%; }
         .btn-prev:hover { background: #e2e8f0; color: var(--text-primary); }
         .btn-next, .btn-submit { background: var(--primary); color: white; flex: 1; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); }
         .btn-next:active, .btn-submit:active { transform: scale(0.98); }
         .btn-submit { display: none; background: var(--success); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2); }
 
-        .test-fill-btn {
-            background: #ef4444; 
-            color: white; 
-            border: none; 
-            padding: 4px 10px; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-size: 0.75rem; 
-            font-weight: 600;
-            transition: all 0.2s;
-        }
+        .test-fill-btn { background: #ef4444; color: white; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; margin-top: 10px; }
         .test-fill-btn:hover { background: #dc2626; color: #fff; }
+        
+        /* Dynamic Alert Boxes */
+        .warning-box { 
+            display: none; 
+            padding: 14px 18px; 
+            border-radius: 12px; 
+            font-size: 0.95rem; 
+            font-weight: 500; 
+            margin-bottom: 20px; 
+            line-height: 1.5;
+            transition: all 0.3s;
+        }
+        .warning-box.info { background-color: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+        .warning-box.error { background-color: #fef2f2; border: 1px solid #fecdd3; color: #9f1239; }
+
+        /* Review Page Styles */
+        .review-section { margin-bottom: 25px; }
+        .review-header { font-size: 1.1rem; color: #0f172a; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 15px; margin-top: 0; }
+        .review-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #f1f5f9; font-size: 0.95rem; }
+        .review-label { color: var(--text-secondary); font-weight: 500; }
+        .review-value { color: var(--text-primary); font-weight: 600; text-align: right; max-width: 60%; word-break: break-word; }
 
         /* =========================================
            MOBILE OPTIMIZATION
@@ -555,39 +219,20 @@
         @media (max-width: 600px) {
             body { padding: 0; background-color: var(--surface); }
             .app-container { border: none; border-radius: 0; box-shadow: none; }
-            
-            /* Landing Page Adjustments */
             #landingPage { padding: 40px 20px; min-height: 100vh; justify-content: center;}
             .brand-logo { max-width: 200px; }
             .landing-title { font-size: 1.8rem; }
             .trust-badges { flex-direction: column; align-items: center; gap: 12px; }
-
-            /* Sticky Header */
-            .app-header { 
-                padding: 20px 20px 15px; 
-                position: sticky; 
-                top: 0; 
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                z-index: 50;
-            }
-            .header-top-row h2 { font-size: 1.3rem; }
+            .app-header { padding: 20px 20px 15px; position: sticky; top: 0; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); z-index: 50; }
+            .form-header-logo { max-width: 110px; }
+            .form-header-title { font-size: 1.15rem; }
             .form-content { padding: 10px 20px 40px; width: 100%; }
             .form-grid { display: flex; flex-direction: column; gap: 18px; }
             .owner-card { padding: 18px 15px; border-radius: 12px; margin-bottom: 20px; }
-
-            /* Sticky Action Footer */
-            .form-footer { 
-                padding: 15px 20px;
-                padding-bottom: calc(15px + env(safe-area-inset-bottom)); 
-                position: sticky; 
-                bottom: 0; 
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
-                z-index: 50;
-            }
+            .form-footer { padding: 15px 20px; padding-bottom: calc(15px + env(safe-area-inset-bottom)); position: sticky; bottom: 0; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); box-shadow: 0 -4px 20px rgba(0,0,0,0.06); z-index: 50; }
             .phone-input select { flex: 0 0 38%; }
+            .review-row { flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 0; }
+            .review-value { text-align: left; max-width: 100%; }
         }
     </style>
 </head>
@@ -595,16 +240,10 @@
 
 <div class="app-container" id="mainContainer">
 
-    <!-- =========================================
-         LANDING PAGE (STEP 0)
-         ========================================= -->
+    <!-- LANDING PAGE (STEP 0) -->
     <div id="landingPage">
-        
-        <!-- PLACE YOUR LOGO FILE NAME IN THE SRC BELOW -->
-        <img src="nt logo.png" alt="NexTech Business Solutions" class="brand-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='block';">
-        
-        <!-- SMART FALLBACK: If logo file is missing, this text representation appears -->
-        <div id="fallback-logo" class="fallback-logo" style="display: none;">
+        <img src="nt logo.png" alt="NexTech Business Solutions" class="brand-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo-landing').style.display='block';">
+        <div id="fallback-logo-landing" class="fallback-logo" style="display: none;">
             NexTech
             <span>Business Solutions</span>
         </div>
@@ -612,60 +251,38 @@
         <h1 class="landing-title">Commercial Funding <span>Application</span></h1>
         <p class="landing-subtitle">A streamlined, secure process to get your business the capital it needs to grow. Fast and fully encrypted.</p>
         
-        <!-- Checklist UX Feature -->
         <div class="prep-box">
             <h3>What you'll need:</h3>
             <ul class="prep-list">
-                <li>
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-                    Basic Business Information & Incorporated Date
-                </li>
-                <li>
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-                    Current & Projected Annual Revenue
-                </li>
-                <li>
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-                    Guarantor Details (Est. FICO & Ownership %)
-                </li>
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>Basic Business Information & Inc Year</li>
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>Current & Projected Annual Revenue</li>
+                <li><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>Guarantor Details (Est. FICO & Ownership %)</li>
             </ul>
         </div>
 
         <div class="trust-badges">
-            <div class="trust-badge">
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                256-bit Secure Transport
-            </div>
-            <div class="trust-badge">
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Takes ~3 Minutes
-            </div>
+            <div class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>256-bit Secure Transport</div>
+            <div class="trust-badge"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Takes ~3 Minutes</div>
         </div>
 
         <button class="btn-start" onclick="startApplication()">
             Start Application
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
-        <div class="privacy-microcopy">
-            By proceeding, you acknowledge that your information will be transmitted securely for business review purposes.
-        </div>
+        <div class="privacy-microcopy">By proceeding, you acknowledge that your information will be transmitted securely for business review purposes.</div>
     </div>
 
-    <!-- =========================================
-         MAIN SECURE FORM
-         ========================================= -->
+    <!-- MAIN SECURE FORM -->
     <div id="formWrapper">
         <div class="app-header">
             <div class="header-top-row">
-                <h2>Secure Application</h2>
-                <span class="step-counter" id="stepCounter">Step 1 of 4</span>
+                <img src="nt logo.png" alt="NexTech" class="form-header-logo" onerror="this.style.display='none'; document.getElementById('form-fallback-logo').style.display='block';">
+                <div id="form-fallback-logo" class="fallback-logo" style="display: none; font-size: 1.5rem; margin: 0;">NexTech</div>
+                <span class="step-counter" id="stepCounter">Step 1 of 5</span>
             </div>
-            <div>
-                <button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[DEV] Auto-Fill Data</button>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
-            </div>
+            <h2 class="form-header-title">Secure Application</h2>
+            <div><button type="button" class="test-fill-btn" id="testFillBtn" onclick="autofillTestData()">[DEV] Auto-Fill Data</button></div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 20%;"></div></div>
         </div>
 
         <form id="modernForm" onsubmit="submitForm(event)" novalidate>
@@ -699,9 +316,9 @@
                             <div class="error-message">Phone number is required</div>
                         </div>
                         <div class="input-group">
-                            <label for="cIncorporatedDate">Incorporation Date<span class="req-star">*</span></label>
-                            <input type="date" id="cIncorporatedDate" name="cIncorporatedDate" required>
-                            <div class="error-message">Date is required</div>
+                            <label for="cIncorporatedDate">Inc Year<span class="req-star">*</span></label>
+                            <input type="number" id="cIncorporatedDate" name="cIncorporatedDate" placeholder="YYYY" min="1800" max="2026" inputmode="numeric" required>
+                            <div class="error-message">Valid year required</div>
                         </div>
                         <label class="toggle-container full-width">
                             <span>Operating out of a commercial space?</span>
@@ -709,8 +326,8 @@
                             <div class="toggle-switch"></div>
                         </label>
                         <div class="input-group full-width">
-                            <label for="cDescription">Business Description<span class="req-star">*</span></label>
-                            <textarea id="cDescription" name="cDescription" rows="3" placeholder="Briefly describe what your business does..." required></textarea>
+                            <label for="cDescription">Description of Commercial Space<span class="req-star">*</span></label>
+                            <textarea id="cDescription" name="cDescription" rows="3" placeholder="Briefly describe the space..." required></textarea>
                             <div class="error-message">Description is required</div>
                         </div>
                         <div class="input-group full-width">
@@ -761,19 +378,27 @@
                             </div>
                             <div class="error-message">Amount is required</div>
                         </div>
-                        <div class="input-group">
-                            <label>Current Annual Revenue<span class="req-star">*</span></label>
+                        <div class="input-group full-width">
+                            <label>Current Year Projected Revenue<span class="req-star">*</span></label>
                             <div class="currency-input">
                                 <span class="currency-prefix">USD</span>
-                                <input type="number" id="cAnnualRevenue" name="cAnnualRevenue" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                                <input type="number" id="cCurrentYearProjected" name="cCurrentYearProjected" step="0.01" placeholder="0.00" inputmode="decimal" required>
                             </div>
                             <div class="error-message">Amount is required</div>
                         </div>
                         <div class="input-group">
-                            <label>Projected 2025 Revenue<span class="req-star">*</span></label>
+                            <label>Prior Year 1 Revenue<span class="req-star">*</span></label>
                             <div class="currency-input">
                                 <span class="currency-prefix">USD</span>
-                                <input type="number" id="cAnnualRevenue2025" name="cAnnualRevenue2025" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                                <input type="number" id="cPriorYear1" name="cPriorYear1" step="0.01" placeholder="0.00" inputmode="decimal" required>
+                            </div>
+                            <div class="error-message">Amount is required</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Prior Year 2 Revenue<span class="req-star">*</span></label>
+                            <div class="currency-input">
+                                <span class="currency-prefix">USD</span>
+                                <input type="number" id="cPriorYear2" name="cPriorYear2" step="0.01" placeholder="0.00" inputmode="decimal" required>
                             </div>
                             <div class="error-message">Amount is required</div>
                         </div>
@@ -844,14 +469,17 @@
                     </div>
                 </div>
 
-                <!-- STEP 4: Additional Owners -->
+                <!-- STEP 4: Additional Guarantors -->
                 <div class="form-step" id="step4">
-                    <p class="step-description">Do you have secondary partners? Add them below, or <strong>skip and submit</strong> if you are the only owner.</p>
+                    <p class="step-description">Please add additional guarantors below. Total combined ownership must equal exactly <strong>100%</strong> before you can continue.</p>
                     
-                    <!-- Owner 2 CARD -->
+                    <!-- Dynamic Warning Box for Ownership < 100% -->
+                    <div id="step4-warning" class="warning-box info"></div>
+                    
+                    <!-- Guarantor 2 CARD -->
                     <div id="owner2-section" class="owner-card" style="display: none;">
                         <div class="sub-header card-header flex-between">
-                            Secondary Owner
+                            Secondary Guarantor
                             <button type="button" class="btn-remove" onclick="removeOwner(2)">
                                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 Remove
@@ -902,10 +530,10 @@
                         </div>
                     </div>
 
-                    <!-- Owner 3 CARD -->
+                    <!-- Guarantor 3 CARD -->
                     <div id="owner3-section" class="owner-card" style="display: none;">
                         <div class="sub-header card-header flex-between">
-                            Tertiary Owner
+                            Tertiary Guarantor
                             <button type="button" class="btn-remove" onclick="removeOwner(3)">
                                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 Remove
@@ -958,8 +586,16 @@
 
                     <button type="button" id="btnAddOwner" class="btn-outline" onclick="addOwner()">
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                        Add Additional Owner
+                        Add Additional Guarantor
                     </button>
+                </div>
+                
+                <!-- STEP 5: REVIEW SUBMISSION -->
+                <div class="form-step" id="step5">
+                    <p class="step-description">Please review your application details below before submitting.</p>
+                    <div id="reviewContent" class="owner-card" style="padding: 20px;">
+                        <!-- JS WILL POPULATE THIS AREA -->
+                    </div>
                 </div>
 
             </div>
@@ -983,7 +619,6 @@
         const formWrap = document.getElementById('formWrapper');
         formWrap.style.display = 'block';
         
-        // Slight delay to trigger CSS fade-in smoothly
         setTimeout(() => {
             formWrap.style.opacity = '1';
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -999,9 +634,9 @@
         document.getElementById('cEmailAddress').value = "test@acmecorp.com";
         document.getElementById('cPhoneType').value = "Work"; 
         document.getElementById('cPhoneNumber').value = "555-123-4567";
-        document.getElementById('cIncorporatedDate').value = "2020-01-01";
+        document.getElementById('cIncorporatedDate').value = "2020";
         document.getElementById('cCommercialSpace').checked = true;
-        document.getElementById('cDescription').value = "Testing webhook payload.";
+        document.getElementById('cDescription').value = "Large warehouse facility located near major transit routes.";
         document.getElementById('cDocumentLink').value = "https://google.com";
 
         // Step 2
@@ -1011,11 +646,12 @@
         document.getElementById('cAddressPostalCode').value = "10001";
         document.getElementById('cAddressCountry').value = "USA";
         
-        document.getElementById('cOpportunityAmount').value = "10000";
-        document.getElementById('cAnnualRevenue').value = "50000";
-        document.getElementById('cAnnualRevenue2025').value = "60000";
+        document.getElementById('cOpportunityAmount').value = "250000";
+        document.getElementById('cCurrentYearProjected').value = "2000000";
+        document.getElementById('cPriorYear1').value = "1500000";
+        document.getElementById('cPriorYear2').value = "1100000";
 
-        // Step 3
+        // Step 3 (Allocated exactly 100% across the 3 owners for easy testing)
         document.getElementById('cSalutationName').value = "Mr.";
         document.getElementById('cFirstName').value = "John";
         document.getElementById('cLastName').value = "Doe";
@@ -1023,10 +659,10 @@
         document.getElementById('cOwnerPhoneType').value = "Mobile"; 
         document.getElementById('cOwnerPhoneNumber').value = "555-111-2222";
         document.getElementById('cFICO').value = "720";
-        document.getElementById('cOwnershipPercentage').value = "100";
+        document.getElementById('cOwnershipPercentage').value = "50"; 
         document.getElementById('cDoYouOwnYourHome').checked = true;
 
-        // Step 4 
+        // Add 2nd Owner
         addOwner(); 
         document.getElementById('cOwner2FirstName').value = "Jane";
         document.getElementById('cOwner2LastName').value = "Smith";
@@ -1034,9 +670,10 @@
         document.getElementById('cOwner2PhoneType').value = "Mobile";
         document.getElementById('cOwner2PhoneNumber').value = "555-000-0152";
         document.getElementById('cOwner2FICO').value = "780";
-        document.getElementById('cOwner2OwnershipPercentage').value = "50";
+        document.getElementById('cOwner2OwnershipPercentage').value = "25"; 
         document.getElementById('cOwner2OwnHome').checked = true;
 
+        // Add 3rd Owner
         addOwner(); 
         document.getElementById('cOwner3FirstName').value = "Bob";
         document.getElementById('cOwner3LastName').value = "Johnson";
@@ -1044,14 +681,15 @@
         document.getElementById('cOwner3PhoneType').value = "Work";
         document.getElementById('cOwner3PhoneNumber').value = "789-456-1234";
         document.getElementById('cOwner3FICO').value = "800";
-        document.getElementById('cOwner3OwnershipPercentage').value = "25";
+        document.getElementById('cOwner3OwnershipPercentage').value = "25"; 
         document.getElementById('cOwner3OwnHome').checked = false;
 
         document.querySelectorAll('input, select, textarea').forEach(el => el.classList.remove('error-border'));
-        document.getElementById('testFillBtn').innerText = "Filled ✓";
+        document.getElementById('testFillBtn').innerText = "Data Filled ✓";
         document.getElementById('testFillBtn').style.background = "#10b981";
         document.getElementById('testFillBtn').style.color = "#ffffff";
     }
+    // =======================================================
 
     let currentStep = 0;
     const steps = document.querySelectorAll('.form-step');
@@ -1059,6 +697,10 @@
     const btnPrev = document.getElementById('btnPrev');
     const btnSubmit = document.getElementById('btnSubmit');
 
+    let owner2Visible = false;
+    let owner3Visible = false;
+
+    // Remove red borders as user types
     document.querySelectorAll('input, select, textarea').forEach(element => {
         element.addEventListener('input', function() {
             if (this.value.trim() !== '') {
@@ -1085,21 +727,18 @@
             sec.style.display = 'block';
             setInputsRequired(sec, true);
             owner2Visible = true;
-            setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         } else if (!owner3Visible) {
             const sec = document.getElementById('owner3-section');
             sec.style.display = 'block';
             setInputsRequired(sec, true);
             owner3Visible = true;
             document.getElementById('btnAddOwner').style.display = 'none';
-            setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
     }
 
     function removeOwner(num) {
         if (num === 2) {
             if (owner3Visible) {
-                // Shift data up smoothly
                 document.getElementById('cOwner2FirstName').value = document.getElementById('cOwner3FirstName').value;
                 document.getElementById('cOwner2LastName').value = document.getElementById('cOwner3LastName').value;
                 document.getElementById('cOwner2Email').value = document.getElementById('cOwner3Email').value;
@@ -1134,6 +773,7 @@
         let isValid = true;
         let firstInvalid = null;
 
+        // Check required fields
         requiredInputs.forEach(input => {
             if (input.value.trim() === '') {
                 input.classList.add('error-border');
@@ -1149,11 +789,83 @@
             }
         });
         
+        // STRICT 100% VALIDATION LOGIC FOR STEP 4
+        if (currentStep === 3) {
+            let totalPct = parseFloat(document.getElementById('cOwnershipPercentage').value) || 0;
+            if (owner2Visible) totalPct += parseFloat(document.getElementById('cOwner2OwnershipPercentage').value) || 0;
+            if (owner3Visible) totalPct += parseFloat(document.getElementById('cOwner3OwnershipPercentage').value) || 0;
+
+            // Round to handle standard floating point math errors
+            totalPct = Math.round(totalPct * 100) / 100;
+
+            if (totalPct !== 100) {
+                isValid = false;
+                const warningBox = document.getElementById('step4-warning');
+                warningBox.style.display = 'block';
+                warningBox.className = 'warning-box error'; // Turn box Red
+                warningBox.innerHTML = `<strong>Error:</strong> Total ownership must equal exactly 100%. Your current total is <strong>${totalPct}%</strong>. Please adjust values or add a missing guarantor.`;
+                
+                // Highlight the percentage boxes to help them find it
+                document.getElementById('cOwnershipPercentage').classList.add('error-border');
+                if (owner2Visible) document.getElementById('cOwner2OwnershipPercentage').classList.add('error-border');
+                if (owner3Visible) document.getElementById('cOwner3OwnershipPercentage').classList.add('error-border');
+                
+                if (!firstInvalid) firstInvalid = document.getElementById('cOwnershipPercentage');
+            } else {
+                document.getElementById('step4-warning').style.display = 'none';
+            }
+        }
+        
         if (firstInvalid) {
             firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        
         return isValid;
+    }
+
+    function populateReview() {
+        const reviewDiv = document.getElementById('reviewContent');
+        let html = '';
+        
+        const addRow = (label, value) => {
+            if(value !== undefined && value !== '' && value !== null && value !== '$null' && value !== 'null%') {
+                html += `<div class="review-row"><span class="review-label">${label}:</span> <span class="review-value">${value}</span></div>`;
+            }
+        };
+
+        const getNum = (id) => document.getElementById(id).value;
+        const getBoolText = (id) => document.getElementById(id).checked ? "Yes" : "No";
+
+        html += '<h4 class="review-header">Business Info</h4>';
+        addRow('Legal Name', document.getElementById('name').value);
+        addRow('Email', document.getElementById('cEmailAddress').value);
+        addRow('Phone', document.getElementById('cPhoneNumber').value);
+        addRow('Inc Year', document.getElementById('cIncorporatedDate').value);
+        addRow('Commercial Space', getBoolText('cCommercialSpace'));
+
+        html += '<h4 class="review-header" style="margin-top:20px;">Financials</h4>';
+        addRow('Opportunity Amt', '$' + getNum('cOpportunityAmount'));
+        addRow('Current Yr Proj.', '$' + getNum('cCurrentYearProjected'));
+        addRow('Prior Yr 1 Rev', '$' + getNum('cPriorYear1'));
+        addRow('Prior Yr 2 Rev', '$' + getNum('cPriorYear2'));
+
+        html += '<h4 class="review-header" style="margin-top:20px;">Primary Guarantor</h4>';
+        addRow('Name', `${document.getElementById('cFirstName').value} ${document.getElementById('cLastName').value}`);
+        addRow('Email', document.getElementById('cOwnerEmail').value);
+        addRow('Ownership %', getNum('cOwnershipPercentage') + '%');
+        addRow('Est. FICO', getNum('cFICO'));
+
+        if(owner2Visible) {
+            html += '<h4 class="review-header" style="margin-top:20px;">Secondary Guarantor</h4>';
+            addRow('Name', `${document.getElementById('cOwner2FirstName').value} ${document.getElementById('cOwner2LastName').value}`);
+            addRow('Ownership %', getNum('cOwner2OwnershipPercentage') + '%');
+        }
+        if(owner3Visible) {
+            html += '<h4 class="review-header" style="margin-top:20px;">Tertiary Guarantor</h4>';
+            addRow('Name', `${document.getElementById('cOwner3FirstName').value} ${document.getElementById('cOwner3LastName').value}`);
+            addRow('Ownership %', getNum('cOwner3OwnershipPercentage') + '%');
+        }
+        
+        reviewDiv.innerHTML = html;
     }
 
     function updateUI() {
@@ -1171,21 +883,42 @@
 
         btnPrev.style.display = currentStep === 0 ? 'none' : 'block';
         
-        if (currentStep === steps.length - 1) {
+        if (currentStep === steps.length - 1) { 
             btnNext.style.display = 'none';
             btnSubmit.style.display = 'block';
+            btnPrev.textContent = "Back to Edit";
         } else {
             btnNext.style.display = 'block';
             btnSubmit.style.display = 'none';
+            btnPrev.textContent = "Back";
         }
     }
 
     function changeStep(direction) {
         if (direction === 1) {
             if (!validateCurrentStep()) return; 
+            
+            // LOGIC: If leaving Step 3 (Primary Guarantor), check Ownership %
+            if (currentStep === 2) { 
+                const ownPct = parseFloat(document.getElementById('cOwnershipPercentage').value) || 0;
+                if (ownPct < 100) {
+                    if (!owner2Visible) addOwner();
+                    const warningBox = document.getElementById('step4-warning');
+                    warningBox.style.display = 'block';
+                    warningBox.className = 'warning-box info'; // Make it Amber colored initially
+                    warningBox.innerHTML = `Primary Guarantor ownership is <strong>${ownPct}%</strong>. You must complete additional guarantor information until total ownership equals 100%.`;
+                } else {
+                    document.getElementById('step4-warning').style.display = 'none';
+                }
+            }
+            
+            // LOGIC: If moving to Step 5 (Review), populate it
+            if (currentStep === 3) {
+                populateReview();
+            }
         }
         
-        document.activeElement.blur();
+        document.activeElement.blur(); 
         
         currentStep += direction;
         if (currentStep < 0) currentStep = 0;
@@ -1199,12 +932,10 @@
     function submitForm(event) {
         event.preventDefault(); 
 
-        if (!validateCurrentStep()) return;
-
         btnSubmit.disabled = true;
         btnSubmit.textContent = "Sending...";
 
-        const formData = new FormData(event.target);
+        const formData = new FormData(document.getElementById("modernForm"));
         
         const getNum = (val) => {
             if (!val) return null;
@@ -1228,12 +959,13 @@
             
             "cOpportunityAmountCurrency": "USD",
             "cOpportunityAmount": getNum(formData.get("cOpportunityAmount")),
-            "cAnnualRevenueCurrency": "USD",
-            "cAnnualRevenue": getNum(formData.get("cAnnualRevenue")),
-            "cAnnualRevenue2025Currency": "USD",
-            "cAnnualRevenue2025": getNum(formData.get("cAnnualRevenue2025")),
+            
+            "cCurrentYearProjectedRevenue": getNum(formData.get("cCurrentYearProjected")),
+            "cPriorYear1Revenue": getNum(formData.get("cPriorYear1")),
+            "cPriorYear2Revenue": getNum(formData.get("cPriorYear2")),
             
             "cIncorporatedDate": formData.get("cIncorporatedDate"),
+            
             "cAddressStreet": formData.get("cAddressStreet"),
             "cAddressCity": formData.get("cAddressCity"),
             "cAddressState": formData.get("cAddressState"),
@@ -1241,7 +973,7 @@
             "cAddressPostalCode": formData.get("cAddressPostalCode"),
             "cAddressMap": "", 
             "cCommercialSpace": document.getElementById("cCommercialSpace").checked,
-            "cDescription": formData.get("cDescription"),
+            "cDescription": formData.get("cDescription"), 
             "cSalutationName": formData.get("cSalutationName"),
             "cFirstName": formData.get("cFirstName"),
             "cLastName": formData.get("cLastName"),
@@ -1270,6 +1002,8 @@
             "cOwner3OwnershipPercentage": getNum(formData.get("cOwner3OwnershipPercentage")),
             "cOwner3OwnHome": document.getElementById("cOwner3OwnHome") ? document.getElementById("cOwner3OwnHome").checked : false
         };
+
+        console.log("Sending Payload:", payload);
 
         fetch("https://api-69a90979af1be5a90.bizioffice.com/webhook/56d4a958-9f72-4228-ae4f-4f2c71dc32a0", {
             method: "POST",
